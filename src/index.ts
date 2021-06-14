@@ -8,10 +8,6 @@ const PORT:number = 8080;
 
 app.use("*", cors());
 
-app.get("/test", (req: Request, res: { send: (arg0: string) => void; }) => {
-    res.send("working")
-});
-
 const server = new ApolloServer({
     resolvers,
     typeDefs: typedefs,
