@@ -1,4 +1,6 @@
+import { GroceryTypeNew } from "./accessHelpers/GroceryData";
 import { groceryHelpers } from "./groceries";
+import { orderItemsHelpers } from "./orderItems";
 import { orderHelpers } from "./orders";
 import { createTables } from "./tables";
 
@@ -24,11 +26,18 @@ createTables(connection);
 
 const groceryAccess = groceryHelpers(connection, "grocery");
 const orderAccess = orderHelpers(connection, "orders");
+const orderItemsAccess = orderItemsHelpers(connection, "order_items");
 
-orderAccess.getAll().then(console.log)
+const Grocery:GroceryTypeNew = {
+    name: 'newGroc',
+    cost: 200,
+}
+
+console.log(groceryAccess.insertOne(Grocery))
 
 export {
     connection,
     groceryAccess,
     orderAccess,
+    orderItemsAccess,
 }

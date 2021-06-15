@@ -1,12 +1,17 @@
 import { getDataPromise } from "../helpers/dataPromise";
+import getFromObjectArray from "../helpers/getFromArray";
 
-export const TableDefs:{[key: string]: string}[] = [
+export type TableDefType = {
+    name: string,
+    def: string,
+}
+
+const TableDefs:TableDefType[] = [
     {
         name:"grocery",
         def: `id INT AUTO_INCREMENT, 
         name VARCHAR(50), 
-        cost INTEGER,
-        PRIMARY KEY (id)`
+        cost INTEGER, PRIMARY KEY (id)`
     },
 
     {  
@@ -42,6 +47,8 @@ export function createTables(connection:any) {
     console.log("Tables created succesfully");
 }
 
-export const getAccessor = (connection: any, tableName: string, query: string, serializer: any, dataPromise=getDataPromise) => {
+export const executeQuery = (connection: any, tableName: string, query: string, serializer: any, dataPromise=getDataPromise) => {
     return dataPromise(connection, query, serializer);
 }
+
+export const getTableDef = (tablename:string) => getFromObjectArray<TableDefType>(TableDefs, "name", tablename)

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
-import { groceryAccess } from './data';
+import { groceryAccess, orderItemsAccess } from './data';
 import { typedefs, resolvers } from './schema'
 
 const app = express();
@@ -20,4 +20,4 @@ server.applyMiddleware({ app, path: "/graphql"})
 
 app.listen(PORT, () => {
     console.log("Listening on port:", PORT)
-})
+});

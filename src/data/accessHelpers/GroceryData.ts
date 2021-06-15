@@ -1,8 +1,9 @@
-export type GroceryType = {
-    id: number,
+export type GroceryTypeNew = {
     name: string,
     cost: number,
 }
+
+export type GroceryType = {id: number} & GroceryTypeNew;
 
 export const toGrocery = (data: any) => {
     let grocery:GroceryType = {
