@@ -8,6 +8,7 @@ const PORT:number = 8080;
 
 app.use("*", cors());
 
+
 const server = new ApolloServer({
     resolvers,
     typeDefs: typedefs,

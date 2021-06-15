@@ -9,6 +9,6 @@ export const Queries = {
 }
 
 export const Resolvers = {
-    OrderResolvers,
-    GroceryResolvers,
+    ...OrderResolvers,
+    ...GroceryResolvers,
 }

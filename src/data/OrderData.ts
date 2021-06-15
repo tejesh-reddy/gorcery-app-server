@@ -1,4 +1,4 @@
-import { groceries, Grocery } from "./GroceryData";
+import { Groceries as groceries, Grocery } from "./GroceryData";
 
 export type Order = {
     id: number,

@@ -1,4 +1,7 @@
-import { groceries } from "./GroceryData";
-import { Orders } from "./OrderData";
+import { Groceries, Grocery } from "./GroceryData";
+import { Orders, Order } from "./OrderData";
+import { connection, getGroceriesAll } from "./accessHelpers";
 
-export { groceries, Orders };
+console.log(getGroceriesAll());
+
+export { Groceries, Orders, Order, Grocery, connection };

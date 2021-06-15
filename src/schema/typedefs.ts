@@ -1,12 +1,11 @@
 var gql = require('graphql-tag');
-import { GroceryQuery, UserQuery } from './schemaData';
-import { OrderQueries } from './schemaData/order';
+import { Queries } from './schemaData';
 
 export const typedefs = gql`
     type Query {
-        ${UserQuery}
-        ${GroceryQuery}
-        ${OrderQueries}
+        ${Queries.UserQuery}
+        ${Queries.GroceryQueries}
+        ${Queries.OrderQueries}
     }
 
     type Grocery {

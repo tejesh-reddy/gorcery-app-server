@@ -1,4 +1,4 @@
-import { groceries } from "../../data";
+import { Groceries } from "../../data";
 import getFromObjectArray from "../../helpers/getFromArray";
 import { getAllGroceries, getGroceryByName } from "../../service/GroceryService";
 

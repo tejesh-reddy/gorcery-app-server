@@ -1,9 +1,9 @@
-import { Queries } from "./schemaData";
+import { Resolvers } from "./schemaData";
 
 export const resolvers = {
     Query: {
         me: () => "working",
-        ...Queries,
+        ...Resolvers,
     }
 };
 
