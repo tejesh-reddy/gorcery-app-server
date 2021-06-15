@@ -1,6 +1,8 @@
 var gql = require('graphql-tag');
 import { Queries } from './schemaData';
 
+
+
 export const typedefs = gql`
     type Query {
         ${Queries.UserQuery}

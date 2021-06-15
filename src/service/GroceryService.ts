@@ -1,10 +1,11 @@
-import { GroceryType } from "../data/accessHelpers/GroceryData";
+import { GroceryGqlType } from "../types/GqlTypes";
 import getFromObjectArray from "../helpers/getFromArray";
+import { GroceryType } from "../types/DomainTypes";
 
 const Groceries:any[] = []
 export function getGroceryByName(
     name: string
-) : GroceryType {
+) : GroceryGqlType {
     return getFromObjectArray(Groceries, 'name', name);
 }
 

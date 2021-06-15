@@ -1,7 +1,9 @@
 import { getDataArrayPromise } from "../helpers/dataPromise";
-import { toOrder, toOrdersArray } from "./accessHelpers/OrderData";
+import { getFirstWords } from "../helpers/getFirstWords";
+import { NoSerializor } from "./accessHelpers";
+import { OrderTypeNew, toOrder, toOrdersArray } from "./accessHelpers/OrderData";
 import { queries } from "./Queries";
-import { executeQuery } from "./tables";
+import { executeQuery, getTableDef } from "./tables";
 
 
 export const orderHelpers = (connection:any, tableName: string) => {
@@ -10,9 +12,13 @@ export const orderHelpers = (connection:any, tableName: string) => {
     const singleAccessor = (query: string) => executeQuery(connection, tableName, query, toOrder);
     const Queries = queries(tableName);
 
+    const tableFields = getFirstWords(getTableDef(tableName).def);
+
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
+
+        insertOne: (value: OrderTypeNew) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
     }
 
 }

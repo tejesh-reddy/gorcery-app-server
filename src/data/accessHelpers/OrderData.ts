@@ -1,8 +1,7 @@
+import { getOrderById } from "../../service/OrderService";
+import { OrderType } from "../../types/DomainTypes";
+import { OrderGqlType } from "../../types/GqlTypes";
 
-export type OrderType = {
-    id: number,
-    status: string,
-};
 
 export const toOrder = (data: any) => {
     let order:OrderType = {
@@ -20,4 +19,15 @@ export const toOrdersArray = (data: any[]) => {
     }
 
     return result;
+}
+
+export async function toGql(data: OrderType) {
+    let order:OrderGqlType = {
+        ...data,
+        items:[]
+    }
+    getOrderById(data.id).then((result:any) => {
+        order.items=result; 
+        return order;
+    });
 }

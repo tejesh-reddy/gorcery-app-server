@@ -1,9 +1,5 @@
-export type GroceryTypeNew = {
-    name: string,
-    cost: number,
-}
-
-export type GroceryType = {id: number} & GroceryTypeNew;
+import { GroceryType, GroceryTypeNew } from "../../types/DomainTypes";
+import { GroceryGqlType } from "../../types/GqlTypes";
 
 export const toGrocery = (data: any) => {
     let grocery:GroceryType = {
@@ -24,3 +20,16 @@ export const toGroceryArray = (data: any[]) => {
     return result;
 }
 
+export const toGql = (data: GroceryType):GroceryGqlType => {
+    let GroceryGqlObject:GroceryGqlType = {...data},
+
+    return GroceryGqlObject;
+}
+
+export const fromGql = (data: GroceryGqlType):GroceryTypeNew => {
+
+    let newGrocery : GroceryTypeNew = {...data}
+
+    return newGrocery;
+
+}

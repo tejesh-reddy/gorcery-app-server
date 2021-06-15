@@ -16,7 +16,8 @@ const TableDefs:TableDefType[] = [
 
     {  
         name: "orders",
-        def: `id INT PRIMARY KEY AUTO_INCREMENT, status VARCHAR(10)`
+        def: `id INT PRIMARY KEY AUTO_INCREMENT,
+        status VARCHAR(10)`
     },
 
     {
@@ -51,4 +52,4 @@ export const executeQuery = (connection: any, tableName: string, query: string, 
     return dataPromise(connection, query, serializer);
 }
 
-export const getTableDef = (tablename:string) => getFromObjectArray<TableDefType>(TableDefs, "name", tablename)
+export const getTableDef = (tablename:string) => getFromObjectArray<TableDefType>(TableDefs, "name", tablename);

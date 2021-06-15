@@ -4,28 +4,34 @@ export const queries = (tablename: string) => {
 
     const selectAll = (tablename: string) => `SELECT * FROM ${tablename}`;
 
-    function insertOne(value:any, fieldNames: string[]):string {
-        let table = `INSERT INTO ${tablename}(`;
-        let values = `VALUES (`;
-
-        for(let field of fieldNames) {
+    const fieldsToValues = (value: any, fieldnames: string[]) => {
+        let query = '(';
+        let values ='('
+        for(let field of fieldnames) {
             if(value[field] !== undefined){
-                table += `${field}, `
+                query += `${field}, `
                 if(typeof value[field] === 'number')
                     values += ""+value[field]+", ";
                 else
                     values += "'" + value[field]+"', "
-
-            console.log('---------', value[field], field)
             }
         }
 
-        table = table.substring(0, table.length-2)+ ') ';
-        values = values.substring(0, values.length-2)+ ')';
+        query = query.substring(0, query.length-2) + ')';
+        values = values.substring(0, values.length-2) + ')';
 
-        console.log(table+values);
+        return {
+            query,
+            values,
 
-        return table+values;
+        }
+    }
+
+    function insertOne(value:any, fieldNames: string[]):string {
+        let {query, values} = fieldsToValues(value, fieldNames);
+        console.log(`INSERT INTO ${tablename} ${query} VALUES ${values}`);
+
+        return `INSERT INTO ${tablename} ${query} VALUES ${values}`
     }
 
     return {

@@ -1,12 +1,13 @@
-import { GroceryType } from "./GroceryData";
-import { OrderType } from "./OrderData";
-import { OrderItemsType } from "./OrderItemsData";
+import * as Grocery from './GroceryData';
+import * as Order from './OrderData';
+import * as OrderItems from './OrderItemsData';
 
 const NoSerializor = (data:any) => data;
 
+
 export {
-    GroceryType,
-    OrderType,
-    OrderItemsType,
     NoSerializor,
+    Grocery,
+    Order,
+    OrderItems,
 }

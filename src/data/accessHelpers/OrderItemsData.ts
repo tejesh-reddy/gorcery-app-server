@@ -1,8 +1,4 @@
-export type OrderItemsType = {
-    grocery_id:number,
-    order_id:number,
-    quantity:number,
-}
+import { OrderItemsType } from "../../types/DomainTypes";
 
 export const toOrderItems = (data: any) => {
     let orderItems:OrderItemsType = {
