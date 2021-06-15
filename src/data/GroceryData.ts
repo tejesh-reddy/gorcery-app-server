@@ -1,9 +1,19 @@
-export type Grocery = {
+import { Sequelize } from "sequelize/types"
+
+export type GroceryType = {
     name: string,
     cost: number,
 }
 
-export const Groceries:Grocery[] = [
+export const Grocery = Sequelize.create({
+    name: {
+        DataTypes.STRING,
+        allowNull: false,
+    },
+
+})
+
+export const Groceries:GroceryType[] = [
     {
         name: 'G1',
         cost: 200,
