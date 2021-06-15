@@ -1,5 +1,6 @@
+import { getDataPromise } from "../helpers/dataPromise";
 
-const TableDefs:{[key: string]: string}[] = [
+export const TableDefs:{[key: string]: string}[] = [
     {
         name:"grocery",
         def: `id INT AUTO_INCREMENT, 
@@ -30,7 +31,6 @@ export function createTables(connection:any) {
 
     TableDefs.forEach(table => {
         let createStatement = `CREATE TABLE IF NOT EXISTS ${table.name} (${table.def})`
-        console.log(createStatement);
         connection.query(createStatement, (err:unknown) => {
             if(err) {
                 console.log('[DB_CREATE_TABLE] Error creating', table.name);
@@ -40,4 +40,8 @@ export function createTables(connection:any) {
     });
 
     console.log("Tables created succesfully");
+}
+
+export const getAccessor = (connection: any, tableName: string, query: string, serializer: any, dataPromise=getDataPromise) => {
+    return dataPromise(connection, query, serializer);
 }

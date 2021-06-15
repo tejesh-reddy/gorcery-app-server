@@ -1,4 +1,3 @@
-import { getAllGroceries } from "../../service/GroceryService";
 import { getAllOrders } from "../../service/OrderService";
 
 export const OrderQueries = `

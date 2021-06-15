@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
+import { groceryAccess } from './data';
 import { typedefs, resolvers } from './schema'
 
 const app = express();
@@ -8,6 +9,7 @@ const PORT:number = 8080;
 
 app.use("*", cors());
 
+groceryAccess;
 
 const server = new ApolloServer({
     resolvers,

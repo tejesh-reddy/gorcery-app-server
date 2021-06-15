@@ -1,7 +1,34 @@
-import { Groceries, Grocery } from "./GroceryData";
-import { Orders, Order } from "./OrderData";
-import { connection, getGroceriesAll } from "./accessHelpers";
+import { groceryHelpers } from "./groceries";
+import { orderHelpers } from "./orders";
+import { createTables } from "./tables";
 
-console.log(getGroceriesAll());
 
-export { Groceries, Orders, Order, Grocery, connection };
+var mysql = require('mysql');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Tejes#123',
+    database: 'testGrocery'
+});
+
+connection.connect((err: unknown) => {
+    if(err) {
+        console.log('[DBConnect] Error connecting to DB - ', err);
+        throw err;
+    }    
+    console.log('DB Connected Successfully');
+});
+
+createTables(connection);
+
+const groceryAccess = groceryHelpers(connection, "grocery");
+const orderAccess = orderHelpers(connection, "orders");
+
+orderAccess.getAll().then(console.log)
+
+export {
+    connection,
+    groceryAccess,
+    orderAccess,
+}

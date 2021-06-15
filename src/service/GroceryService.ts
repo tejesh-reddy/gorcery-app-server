@@ -1,12 +1,13 @@
-import { Groceries, Grocery } from "../data/GroceryData";
+import { GroceryType } from "../data/accessHelpers/GroceryData";
 import getFromObjectArray from "../helpers/getFromArray";
 
+const Groceries:any[] = []
 export function getGroceryByName(
     name: string
-) : Grocery {
+) : GroceryType {
     return getFromObjectArray(Groceries, 'name', name);
 }
 
-export function getAllGroceries() : Grocery[] {
+export function getAllGroceries() : GroceryType[] {
     return Groceries;
 }

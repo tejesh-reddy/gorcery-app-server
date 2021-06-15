@@ -1,13 +1,15 @@
-import { Order, Orders } from "../data"
+import { OrderType } from "../data/accessHelpers";
 import getFromObjectArray from "../helpers/getFromArray"
+
+const Orders:any[] = [];
 
 export function getOrderById(
     id: number
-    ):Order{
+    ):OrderType{
     return getFromObjectArray(Orders, 'id', id);
 }
 
-export function getAllOrders() : Order[] {
+export function getAllOrders() : OrderType[] {
     console.log(Orders);
     return Orders;
 }
