@@ -1,4 +1,5 @@
 
+import { addressHelpers } from "./address";
 import { categoryHelpers } from "./category";
 import { groceryHelpers } from "./groceries";
 import { orderItemsHelpers } from "./orderItems";
@@ -31,6 +32,7 @@ const orderAccess = orderHelpers(connection, "orders");
 const orderItemsAccess = orderItemsHelpers(connection, "order_items");
 const categoryAccess = categoryHelpers(connection, 'category');
 const userAccess = userHelpers(connection, "user");
+const addressAccess = addressHelpers(connection, "address");
 
 export {
     connection,
@@ -39,4 +41,5 @@ export {
     orderItemsAccess,
     categoryAccess,
     userAccess,
+    addressAccess,
 }

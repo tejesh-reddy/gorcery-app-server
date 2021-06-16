@@ -27,6 +27,7 @@ export type UserType = {
     id: number,
     username: string,
     email_id: string,
+    address_id: number,
 }
 
 export type AddressType = {

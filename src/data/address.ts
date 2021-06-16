@@ -6,7 +6,7 @@ import { toAddress, toAddressArray } from "./accessHelpers/AddressData";
 import { queries } from "./Queries";
 import { executeQuery, getTableDef } from "./tables";
 
-export const groceryHelpers = (connection:any, tableName: string) => {
+export const addressHelpers = (connection:any, tableName: string) => {
 
     const arrayAccessor = (query: string) => executeQuery(connection, tableName, query, toAddressArray, getDataArrayPromise);
     const singleAccessor = (query: string) => executeQuery(connection, tableName, query, toAddress);

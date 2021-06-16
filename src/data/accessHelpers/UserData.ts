@@ -8,6 +8,7 @@ export const toUser = (data: any) :UserType => {
             id: null,
             username: null,
             email_id: null,
+            address_id: null,
         };
     }
 
@@ -15,6 +16,7 @@ export const toUser = (data: any) :UserType => {
         id: data.id,
         username: data.username,
         email_id: data.email_id,
+        address_id: data.address_id,
     }
     return user;
 }
@@ -29,7 +31,7 @@ export const toUserArray = (data: any[]) : UserType[] => {
 }
 
 export const toGql = (data: UserType): UserGqlType => {
-    let UserGqlObject:UserGqlType = {...data};
+    let UserGqlObject:UserGqlType = {...data, address:null};
 
     return UserGqlObject;
 }
