@@ -7,7 +7,4 @@ const NoSerializor = (data:any) => data;
 
 export {
     NoSerializor,
-    Grocery,
-    Order,
-    OrderItems,
 }

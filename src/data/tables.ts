@@ -7,19 +7,27 @@ export type TableDefType = {
 }
 
 const TableDefs:TableDefType[] = [
-    {
-        name:"grocery",
-        def: `id INT AUTO_INCREMENT, 
-        name VARCHAR(50), 
-        cost INTEGER, PRIMARY KEY (id)`
-    },
 
+    {
+        name: "category",
+        def: `id INT AUTO_INCREMENT,
+        name VARCHAR(20),`
+    },
     {  
         name: "orders",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
         status VARCHAR(10)`
     },
-
+    {
+        name:"grocery",
+        def: `id INT AUTO_INCREMENT, 
+        name VARCHAR(50),
+        cost INTEGER, 
+        category_id INT,
+        PRIMARY KEY (id)
+        CONSTRAINT FOREIGN KEY FK_Category (category_id)
+        REFERENCES category(id)`
+    },
     {
         name: "order_items",
         def: `grocery_id INT, 
@@ -31,6 +39,7 @@ const TableDefs:TableDefType[] = [
         CONSTRAINT FOREIGN KEY FK_Order (order_id)
         REFERENCES orders(id)`
     },
+
 ]
 
 export function createTables(connection:any) {

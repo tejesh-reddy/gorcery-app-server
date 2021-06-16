@@ -22,6 +22,7 @@ export const groceryHelpers = (connection:any, tableName: string) => {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
         getByName: (name: string) => singleAccessor(Queries.getByField("name", name)),
+        getByFields: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: GroceryTypeNew) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
     }
