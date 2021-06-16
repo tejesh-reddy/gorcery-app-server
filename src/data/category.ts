@@ -1,7 +1,8 @@
 import { getDataArrayPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
+import { CategoryType } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
-import { CategoryType, toCategory, toCategoryArray } from "./accessHelpers/CategoryData";
+import { toCategory, toCategoryArray } from "./accessHelpers/CategoryData";
 import { queries } from "./Queries";
 import { executeQuery, getTableDef } from "./tables";
 

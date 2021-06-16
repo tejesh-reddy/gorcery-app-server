@@ -16,7 +16,7 @@ export function toAddressArray(data: any) : AddressType[] {
 }
 
 export function toGql(data: AddressType) : AddressGqlType {
-    let result : AddressGqlType = {...data, groceries:[]};
+    let result : AddressGqlType = {...data};
 
     return result;
 
