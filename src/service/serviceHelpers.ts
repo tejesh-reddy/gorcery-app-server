@@ -2,7 +2,6 @@ import { mergeFieldOfObjectArray } from "../helpers/getFromArray";
 
 export async function join(
     mainObject:any, 
-    mainAccessObject: any,
     joinAccessObject:any,
     joinColumn:string,
     field:string,

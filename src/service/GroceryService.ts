@@ -1,7 +1,6 @@
-import { GroceryType } from "../types/DomainTypes";
 import { groceryAccess } from "../data";
 
-const Groceries:any[] = []
+
 export async function getGroceryByName(
     name: string
 ) {

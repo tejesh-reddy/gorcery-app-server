@@ -8,7 +8,7 @@ import { join } from "./serviceHelpers";
 const Orders:any[] = [];
 
 async function attachItems(order:unknown) {
-    let result = join(order, orderAccess, orderItemsAccess, "order_id", "items", "grocery_id", toGql);
+    let result = join(order, orderItemsAccess, "order_id", "items", "grocery_id", toGql);
     return result.then(async function (result: any) {
         for(let i = 0; i < result.items.length; i++) {
             result.items[i] = await getGroceryById(result.items[i]);

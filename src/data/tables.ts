@@ -11,7 +11,8 @@ const TableDefs:TableDefType[] = [
     {
         name: "category",
         def: `id INT AUTO_INCREMENT,
-        name VARCHAR(20),`
+        name VARCHAR(20),
+        PRIMARY KEY(id)`
     },
     {  
         name: "orders",
@@ -23,8 +24,8 @@ const TableDefs:TableDefType[] = [
         def: `id INT AUTO_INCREMENT, 
         name VARCHAR(50),
         cost INTEGER, 
-        category_id INT,
-        PRIMARY KEY (id)
+        category_id INT NOT NULL,
+        PRIMARY KEY (id),
         CONSTRAINT FOREIGN KEY FK_Category (category_id)
         REFERENCES category(id)`
     },
@@ -48,7 +49,7 @@ export function createTables(connection:any) {
         let createStatement = `CREATE TABLE IF NOT EXISTS ${table.name} (${table.def})`
         connection.query(createStatement, (err:unknown) => {
             if(err) {
-                console.log('[DB_CREATE_TABLE] Error creating', table.name);
+                console.log('[DB_CREATE_TABLE] Error creating', table.name,'--', createStatement);
                 throw err;
             }
         })

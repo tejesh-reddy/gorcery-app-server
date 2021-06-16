@@ -1,10 +1,12 @@
 import {getFromObjectArray} from "../../helpers/getFromArray";
 import { getAllGroceries, getGroceryById, getGroceryByName } from "../../service/GroceryService";
 
+//TODO: Add groceryByCategory(category: string): Grocery to schema
 export const GroceryQueries = `
     grocery(name: String!): Grocery
     groceries: [Grocery!]
     groceryById(id: Int!): Grocery
+    
 `;
 
 export const GroceryResolvers = {

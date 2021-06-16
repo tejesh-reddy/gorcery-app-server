@@ -1,4 +1,5 @@
 
+import { categoryHelpers } from "./category";
 import { groceryHelpers } from "./groceries";
 import { orderItemsHelpers } from "./orderItems";
 import { orderHelpers } from "./orders";
@@ -27,10 +28,12 @@ createTables(connection);
 const groceryAccess = groceryHelpers(connection, "grocery");
 const orderAccess = orderHelpers(connection, "orders");
 const orderItemsAccess = orderItemsHelpers(connection, "order_items");
+const categoryAccess = categoryHelpers(connection, 'category');
 
 export {
     connection,
     groceryAccess,
     orderAccess,
     orderItemsAccess,
+    categoryAccess,
 }

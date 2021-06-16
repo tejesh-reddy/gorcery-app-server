@@ -14,6 +14,7 @@ export const typedefs = gql`
         name: String!
         cost: Int!
         id: Int!
+        category_id: Int
     }
 
     type Order {
