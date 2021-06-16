@@ -1,14 +1,19 @@
-import { GroceryGqlType } from "../types/GqlTypes";
-import getFromObjectArray from "../helpers/getFromArray";
 import { GroceryType } from "../types/DomainTypes";
+import { groceryAccess } from "../data";
 
 const Groceries:any[] = []
-export function getGroceryByName(
+export async function getGroceryByName(
     name: string
-) : GroceryGqlType {
-    return getFromObjectArray(Groceries, 'name', name);
+) {
+    return groceryAccess.getByName(name);
 }
 
-export function getAllGroceries() : GroceryType[] {
-    return Groceries;
+export async function getGroceryById(
+    id: number
+) {
+    return groceryAccess.getById(id);
+}
+
+export async function getAllGroceries() {
+    return groceryAccess.getAll();
 }

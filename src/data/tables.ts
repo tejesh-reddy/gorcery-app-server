@@ -1,5 +1,5 @@
 import { getDataPromise } from "../helpers/dataPromise";
-import getFromObjectArray from "../helpers/getFromArray";
+import { getFromObjectArray } from "../helpers/getFromArray";
 
 export type TableDefType = {
     name: string,

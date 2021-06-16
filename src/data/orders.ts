@@ -1,7 +1,8 @@
 import { getDataArrayPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
+import { OrderTypeNew } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
-import { OrderTypeNew, toOrder, toOrdersArray } from "./accessHelpers/OrderData";
+import {  toOrder, toOrdersArray } from "./accessHelpers/OrderData";
 import { queries } from "./Queries";
 import { executeQuery, getTableDef } from "./tables";
 

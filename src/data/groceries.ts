@@ -1,7 +1,8 @@
 import { getDataArrayPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
+import { GroceryTypeNew } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
-import { GroceryTypeNew, toGrocery, toGroceryArray } from "./accessHelpers/GroceryData";
+import { toGrocery, toGroceryArray } from "./accessHelpers/GroceryData";
 import { queries } from "./Queries";
 import { executeQuery, getTableDef } from "./tables";
 
@@ -20,6 +21,8 @@ export const groceryHelpers = (connection:any, tableName: string) => {
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
+        getByName: (name: string) => singleAccessor(Queries.getByField("name", name)),
+
         insertOne: (value: GroceryTypeNew) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
     }
 }

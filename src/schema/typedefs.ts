@@ -13,10 +13,12 @@ export const typedefs = gql`
     type Grocery {
         name: String!
         cost: Int!
+        id: Int!
     }
 
     type Order {
         id: Int
+        status: String
         items: [Grocery!]
     }
 `

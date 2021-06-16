@@ -1,5 +1,5 @@
 export type GroceryGqlType = {
-    id: id,
+    id: number,
     name: string,
     cost: number,
 };

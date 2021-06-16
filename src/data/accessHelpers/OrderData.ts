@@ -21,13 +21,8 @@ export const toOrdersArray = (data: any[]) => {
     return result;
 }
 
-export async function toGql(data: OrderType) {
-    let order:OrderGqlType = {
-        ...data,
-        items:[]
-    }
-    getOrderById(data.id).then((result:any) => {
-        order.items=result; 
-        return order;
-    });
+export const toGql = (data: OrderType):OrderGqlType => {
+    let OrderGqlObject:OrderGqlType = {...data, items: []};
+
+    return OrderGqlObject;
 }

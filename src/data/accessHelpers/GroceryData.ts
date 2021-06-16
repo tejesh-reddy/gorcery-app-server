@@ -21,7 +21,7 @@ export const toGroceryArray = (data: any[]) => {
 }
 
 export const toGql = (data: GroceryType):GroceryGqlType => {
-    let GroceryGqlObject:GroceryGqlType = {...data},
+    let GroceryGqlObject:GroceryGqlType = {...data};
 
     return GroceryGqlObject;
 }

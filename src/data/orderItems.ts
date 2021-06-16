@@ -1,8 +1,8 @@
 import { getDataArrayPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
+import { OrderItemsType } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
-import { toGrocery, toGroceryArray } from "./accessHelpers/GroceryData";
-import { OrderItemsType, toOrderItems, toOrderItemsArray } from "./accessHelpers/OrderItemsData";
+import { toOrderItems, toOrderItemsArray } from "./accessHelpers/OrderItemsData";
 import { queries } from "./Queries";
 import { executeQuery, getTableDef } from "./tables";
 
@@ -22,6 +22,7 @@ export const orderItemsHelpers = (connection:any, tableName: string) => {
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
         getByOrderId: (orderId:number) => arrayAccessor(Queries.getByField("order_id", orderId)),
+        getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: OrderItemsType) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
     }

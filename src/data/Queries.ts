@@ -36,8 +36,14 @@ export const queries = (tablename: string) => {
 
     return {
         getAll: () => selectAll(tablename),
-        getById: (id:number|string) => `${selectAll(tablename)} WHERE id=${id}`,
-        getByField: (fieldname:string, value: number|string) => `${selectAll(tablename)} WHERE ${fieldname}=${value}`,
+        getById: (id:number|string) => {
+            return `${selectAll(tablename)} WHERE id=${id}`
+        },
+        getByField: (fieldname:string, value: number|string) => {
+            if(typeof value === 'number')
+                return `${selectAll(tablename)} WHERE ${fieldname}=${value}`;
+            return `${selectAll(tablename)} WHERE ${fieldname}='${value}'`;
+        },
 
         insert: insertOne
 
