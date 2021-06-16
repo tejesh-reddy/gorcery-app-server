@@ -6,7 +6,10 @@ export type GroceryTypeNew = {
 
 export type GroceryType = {id: number} & GroceryTypeNew;
 
-
+export type CategoryType = {
+    id: number,
+    name: string,
+}
 
 export type OrderTypeNew = {
     status: string,
@@ -24,4 +27,12 @@ export type UserType = {
     id: number,
     username: string,
     email_id: string,
+}
+
+export type AddressType = {
+    id: number,
+    house_no: string,
+    city: string,
+    street: string,
+    postal_code: number,
 }

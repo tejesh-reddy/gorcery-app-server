@@ -1,9 +1,7 @@
+import { CategoryType } from "../../types/DomainTypes";
 import { CategoryGqlType } from "../../types/GqlTypes";
 
-export type CategoryType = {
-    id: number,
-    name: string,
-}
+
 
 export function toCategory(data: any) : CategoryType {
     let category : CategoryType = {...data};

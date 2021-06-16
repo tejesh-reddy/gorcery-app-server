@@ -1,24 +1,11 @@
-export type GroceryGqlType = {
-    id: number,
-    name: string,
-    cost: number,
-    category_id: number,
-};
+import { AddressType, CategoryType, GroceryType, OrderType, UserType } from "./DomainTypes";
 
-export type OrderGqlType = {
-    id: number,
-    status: string,
-    items: GroceryGqlType[],
-}
+export type GroceryGqlType = GroceryType;
 
-export type CategoryGqlType = {
-    id: number,
-    name: string,
-    groceries: GroceryGqlType[],
-}
+export type OrderGqlType = OrderType & {items: GroceryGqlType[]};
 
-export type UserGqlType = {
-    id: number,
-    username: string,
-    email_id: string,
-}
+export type CategoryGqlType = CategoryType & {groceries: GroceryGqlType[]}
+
+export type UserGqlType = UserType
+
+export type AddressGqlType = AddressType;
