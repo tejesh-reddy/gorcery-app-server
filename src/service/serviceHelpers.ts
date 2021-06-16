@@ -5,15 +5,14 @@ export async function join(
     joinAccessObject:any,
     joinColumn:string,
     field:string,
-    joinField: string,
-    toGql: any){
+    joinField: string
+    ){
         let joinValue = await joinAccessObject.getByField(joinColumn, mainObject.id);
-        let result = toGql(mainObject);
 
-        result[field] = mergeFieldOfObjectArray(joinValue, joinField);
+        mainObject[field] = mergeFieldOfObjectArray(joinValue, joinField);
 
-        for(let i = 0; i < result[field].length; i++) {
-            result[field][i] = await joinAccessObject.getById(result.items[i]);
+        for(let i = 0; i < mainObject[field].length; i++) {
+            mainObject[field][i] = await joinAccessObject.getById(mainObject[field][i]);
         }
-        return result;
+        return mainObject;
 }

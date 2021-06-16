@@ -7,8 +7,9 @@ import { join } from "./serviceHelpers";
 
 const Orders:any[] = [];
 
-async function attachItems(order:unknown) {
-    let result = join(order, orderItemsAccess, "order_id", "items", "grocery_id", toGql);
+async function attachItems(order:any) {
+    let orderGql = toGql(order);
+    let result = join(orderGql, orderItemsAccess, "order_id", "items", "grocery_id");
     return result;     
 }
 

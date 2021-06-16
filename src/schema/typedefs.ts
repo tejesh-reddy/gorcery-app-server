@@ -27,5 +27,6 @@ export const typedefs = gql`
     type Category {
         id: Int!
         name: String
+        groceries: [Grocery!]
     }
 `
