@@ -11,4 +11,6 @@ export function toCategory(data: any) : CategoryType {
 
 export function toCategoryArray(data: any) : CategoryType[] {
     data.map(toCategory);
+
+    return data;
 }
