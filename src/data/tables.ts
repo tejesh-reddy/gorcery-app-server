@@ -20,6 +20,13 @@ const TableDefs:TableDefType[] = [
         status VARCHAR(10)`
     },
     {
+        name: "user",
+        def: `id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(30) NOT NULL
+        password VARCHAR(15) NOT NULL
+        email_id VARCHAR(30) NOT NULL`
+    },
+    {
         name:"grocery",
         def: `id INT AUTO_INCREMENT, 
         name VARCHAR(50),
