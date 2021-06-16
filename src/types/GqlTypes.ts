@@ -16,3 +16,9 @@ export type CategoryGqlType = {
     name: string,
     groceries: GroceryGqlType[],
 }
+
+export type UserGqlType = {
+    id: number,
+    username: string,
+    email_id: string,
+}
