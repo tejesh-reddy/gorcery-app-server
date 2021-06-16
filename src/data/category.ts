@@ -1,13 +1,13 @@
 import { getDataArrayPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
 import { NoSerializor } from "./accessHelpers";
-import { CategoryType, toCategory } from "./accessHelpers/CategoryData";
+import { CategoryType, toCategory, toCategoryArray } from "./accessHelpers/CategoryData";
 import { queries } from "./Queries";
 import { executeQuery, getTableDef } from "./tables";
 
 
 export const categoryHelpers = (connection: any, tableName: string) => {
-    const arrayAccessor = (query: string) => executeQuery(connection, tableName, query, toCategory, getDataArrayPromise);
+    const arrayAccessor = (query: string) => executeQuery(connection, tableName, query, toCategoryArray, getDataArrayPromise);
     const singleAccessor = (query: string) => executeQuery(connection, tableName, query, toCategory);
     const Queries = queries(tableName);
     
