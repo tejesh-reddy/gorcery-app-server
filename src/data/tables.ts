@@ -20,11 +20,22 @@ const TableDefs:TableDefType[] = [
         status VARCHAR(10)`
     },
     {
+        name: "address",
+        def: `id INT PRIMARY KEY AUTO_INCREMENT,
+        house_no VARCHAR(8),
+        street VARCHAR(15),
+        city VARCHAR(15),
+        postal_code INT`
+    },
+    {
         name: "user",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
         username VARCHAR(30) NOT NULL,
         password VARCHAR(70) NOT NULL,
-        email_id VARCHAR(30) NOT NULL`
+        email_id VARCHAR(30) NOT NULL,
+        address INT,
+        CONSTRAINT FOREIGN KEY FK_Address (address)
+        REFERENCES address(id)`
     },
     {
         name:"grocery",
