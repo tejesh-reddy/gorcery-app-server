@@ -6,7 +6,6 @@ export const GroceryQueries = `
     grocery(name: String!): Grocery
     groceries: [Grocery!]
     groceryById(id: Int!): Grocery
-    
 `;
 
 export const GroceryResolvers = {

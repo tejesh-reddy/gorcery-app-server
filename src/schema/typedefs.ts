@@ -8,6 +8,7 @@ export const typedefs = gql`
         ${Queries.UserQuery}
         ${Queries.GroceryQueries}
         ${Queries.OrderQueries}
+        ${Queries.CategoryQueries}
     }
 
     type Grocery {
@@ -21,5 +22,10 @@ export const typedefs = gql`
         id: Int
         status: String
         items: [Grocery!]
+    }
+
+    type Category {
+        id: Int!
+        name: String
     }
 `
