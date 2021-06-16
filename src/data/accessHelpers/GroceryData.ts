@@ -5,7 +5,8 @@ export const toGrocery = (data: any) => {
     let grocery:GroceryType = {
         id: data.id,
         name: data.name,
-        cost: data.cost
+        cost: data.cost,
+        category_id: data.category_id,
     }
 
     return grocery;

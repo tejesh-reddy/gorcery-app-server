@@ -1,6 +1,7 @@
 export type GroceryTypeNew = {
     name: string,
     cost: number,
+    category_id: number,
 }
 
 export type GroceryType = {id: number} & GroceryTypeNew;
