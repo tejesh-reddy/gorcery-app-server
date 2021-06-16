@@ -11,9 +11,10 @@ export const toUser = (data: any) :UserType => {
         };
     }
 
-    let user:any = {
+    let user:UserType = {
         id: data.id,
-        username: data.status,
+        username: data.username,
+        email_id: data.email_id,
     }
     return user;
 }
