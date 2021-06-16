@@ -19,7 +19,7 @@ export const userHelpers = (connection:any, tableName: string) => {
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
-        getByusername: (name: string) => singleAccessor(Queries.getByField("username", name)),
+        getByUsername: (name: string) => singleAccessor(Queries.getByField("username", name)),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: UserGqlType) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
