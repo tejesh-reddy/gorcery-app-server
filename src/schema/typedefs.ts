@@ -30,9 +30,18 @@ export const typedefs = gql`
         groceries: [Grocery!]
     }
 
+
+    type Address {
+        house_no: String
+        street: String
+        city: String
+        postal_code: Int
+    }
+
     type User {
         id: Int!
         username: String
         email_id: String
+        address: Address
     }
 `

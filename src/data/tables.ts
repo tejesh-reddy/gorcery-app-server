@@ -33,7 +33,7 @@ const TableDefs:TableDefType[] = [
         username VARCHAR(30) NOT NULL,
         password VARCHAR(70) NOT NULL,
         email_id VARCHAR(30) NOT NULL,
-        address INT,
+        address INT NOT NULL,
         CONSTRAINT FOREIGN KEY FK_Address (address)
         REFERENCES address(id)`
     },

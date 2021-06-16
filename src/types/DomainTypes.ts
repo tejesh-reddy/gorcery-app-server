@@ -29,13 +29,10 @@ export type UserType = {
     email_id: string,
 }
 
-export type AddressTypeNew = {
+export type AddressType = {
     house_no: string,
     city: string,
     street: string,
     postal_code: number,
 }
 
-export type AddressType = {
-    id: number,
-} & AddressTypeNew
