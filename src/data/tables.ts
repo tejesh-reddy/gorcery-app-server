@@ -22,8 +22,8 @@ const TableDefs:TableDefType[] = [
     {
         name: "user",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(30) NOT NULL
-        password VARCHAR(70) NOT NULL
+        username VARCHAR(30) NOT NULL,
+        password VARCHAR(70) NOT NULL,
         email_id VARCHAR(30) NOT NULL`
     },
     {

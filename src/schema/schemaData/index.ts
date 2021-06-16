@@ -1,17 +1,18 @@
-import { UserQuery } from './userQuery';
+import { UserQueries, UserResolvers } from './user';
 import { GroceryQueries, GroceryResolvers } from './grocery';
 import { OrderQueries, OrderResolvers } from './order';
 import { CategoryQueries, CategoryResolvers } from './category';
 
 export const Queries = {
-    UserQuery,
     GroceryQueries,
     OrderQueries,
-    CategoryQueries
+    UserQueries,
+    CategoryQueries,
 }
 
 export const Resolvers = {
     ...OrderResolvers,
     ...GroceryResolvers,
+    ...UserResolvers,
     ...CategoryResolvers
 }

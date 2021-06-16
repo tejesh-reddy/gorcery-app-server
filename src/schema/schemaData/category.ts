@@ -6,7 +6,6 @@ export const CategoryQueries = `
 `;
 
 export const CategoryResolvers = {
-    // TODO
     categories: () => getAllCategories(),
     categoryById: (_:unknown, {id}: {id: number}) => getCategoryById(id),
 }

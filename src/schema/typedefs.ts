@@ -5,7 +5,7 @@ import { Queries } from './schemaData';
 
 export const typedefs = gql`
     type Query {
-        ${Queries.UserQuery}
+        ${Queries.UserQueries}
         ${Queries.GroceryQueries}
         ${Queries.OrderQueries}
         ${Queries.CategoryQueries}
@@ -28,5 +28,11 @@ export const typedefs = gql`
         id: Int!
         name: String
         groceries: [Grocery!]
+    }
+
+    type User {
+        id: Int!
+        username: String
+        email_id: String
     }
 `
