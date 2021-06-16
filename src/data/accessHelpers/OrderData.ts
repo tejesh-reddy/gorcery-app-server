@@ -4,10 +4,18 @@ import { OrderGqlType } from "../../types/GqlTypes";
 
 
 export const toOrder = (data: any) => {
+
+    if(data === undefined) {
+        console.log('undefined');
+        return {
+            id: null,
+            status: null,
+        };
+    }
+
     let order:OrderType = {
         id: data.id,
         status: data.status,
-        
     }
     return order;
 }

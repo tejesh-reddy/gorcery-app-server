@@ -10,3 +10,9 @@ export type OrderGqlType = {
     status: string,
     items: GroceryGqlType[],
 }
+
+export type CategoryGqlType = {
+    id: number,
+    name: string,
+    groceries: GroceryGqlType[],
+}

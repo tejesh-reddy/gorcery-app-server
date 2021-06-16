@@ -12,8 +12,8 @@ export const typedefs = gql`
     }
 
     type Grocery {
-        name: String!
-        cost: Int!
+        name: String
+        cost: Int
         id: Int!
         category_id: Int
     }

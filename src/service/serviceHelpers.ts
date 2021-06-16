@@ -10,7 +10,10 @@ export async function join(
         let joinValue = await joinAccessObject.getByField(joinColumn, mainObject.id);
         let result = toGql(mainObject);
 
-        result[field] = mergeFieldOfObjectArray(joinValue, joinField)
+        result[field] = mergeFieldOfObjectArray(joinValue, joinField);
 
+        for(let i = 0; i < result[field].length; i++) {
+            result[field][i] = await joinAccessObject.getById(result.items[i]);
+        }
         return result;
 }

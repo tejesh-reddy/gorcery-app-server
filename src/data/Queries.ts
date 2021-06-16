@@ -45,7 +45,7 @@ export const queries = (tablename: string) => {
             return `${selectAll(tablename)} WHERE ${fieldname}='${value}'`;
         },
 
-        insert: insertOne
+        insert: insertOne,
 
     };
 };
