@@ -1,4 +1,4 @@
-import { orderAccess, orderItemsAccess } from "../data";
+import { groceryAccess, orderAccess, orderItemsAccess } from "../data";
 import { toGql } from "../data/accessHelpers/GroceryData";
 import { OrderType } from "../types/DomainTypes";
 import { OrderGqlType } from "../types/GqlTypes";
@@ -9,7 +9,7 @@ const Orders:any[] = [];
 
 async function attachItems(order:any) {
     let orderGql = toGql(order);
-    let result = join(orderGql, orderItemsAccess, "order_id", "items", "grocery_id");
+    let result = join(orderGql, orderItemsAccess, getGroceryById, "order_id", "items", "grocery_id");
     return result;     
 }
 

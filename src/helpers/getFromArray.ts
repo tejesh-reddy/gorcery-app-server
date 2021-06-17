@@ -7,7 +7,7 @@ export function getFromObjectArray<T>(
         return source.filter(obj => obj[key] === keyValue)[0];
 }
 
-export function mergeFieldOfObjectArray(array: any[], fieldName: string) {
+export function selectFromObjectArray(array: any[], fieldName: string) {
     let result = [];
 
     for(let obj of array) {

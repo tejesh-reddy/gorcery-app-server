@@ -6,6 +6,7 @@ import { orderItemsHelpers } from "./orderItems";
 import { orderHelpers } from "./orders";
 import { createTables } from "./tables";
 import { userHelpers } from "./user";
+import { userOrderHelpers } from "./userOrder";
 
 
 var mysql = require('mysql');
@@ -33,6 +34,7 @@ const orderItemsAccess = orderItemsHelpers(connection, "order_items");
 const categoryAccess = categoryHelpers(connection, 'category');
 const userAccess = userHelpers(connection, "user");
 const addressAccess = addressHelpers(connection, "address");
+const userOrderAccess = userOrderHelpers(connection, "user_orders")
 
 export {
     connection,
@@ -42,4 +44,5 @@ export {
     categoryAccess,
     userAccess,
     addressAccess,
+    userOrderAccess,
 }

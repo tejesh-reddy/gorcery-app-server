@@ -1,6 +1,7 @@
-import { addressAccess, orderAccess, userAccess } from "../data";
+import { addressAccess, orderAccess, userAccess, userOrderAccess } from "../data";
 import { toGql } from "../data/accessHelpers/UserData";
 import { UserGqlType } from "../types/GqlTypes";
+import { getOrderById } from "./OrderService";
 import { join } from "./serviceHelpers";
 
 
@@ -13,7 +14,7 @@ async function attachAddress(user: any) {
 }
 
 async function attachOrders(user: UserGqlType) {
-    const result = join(user, orderAccess, "user_id", "orders", "user_id");
+    const result = join(user, userOrderAccess, getOrderById, "user_id", "orders", "user_id");
     return result;  
 }
 
