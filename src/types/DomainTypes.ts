@@ -29,6 +29,7 @@ export type UserType = {
     username: string,
     email_id: string,
     address_id: number,
+    cart_id: number,
 }
 
 export type AddressType = {
