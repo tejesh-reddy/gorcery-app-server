@@ -6,14 +6,13 @@ import { join } from "./serviceHelpers";
 async function attachAddress(user: any) {
     let address:any = await addressAccess.getById(user.address_id);
     let userGql = toGql(user);
-    userGql.address = address;
+    userGql.address = {...address};
 
     return userGql;
 }
 
 async function attachOrders(user: any) {
-    let userGql = toGql(user);
-    let result = join(userGql, orderAccess, "user_id", "orders", "user_id");
+    let result = join(user, orderAccess, "user_id", "orders", "user_id");
     return result;  
 }
 
@@ -40,7 +39,7 @@ async function attachOrdersToUsers(users: any[]) {
 export function getAllUsers() {
     return userAccess.getAll()
     .then(attachAddressToUsers)
-    .then(attachOrdersToUsers);
+    .then(attachOrdersToUsers)
 }
 
 export function getUserById(id: number) {

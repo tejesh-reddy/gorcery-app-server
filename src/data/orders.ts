@@ -18,6 +18,7 @@ export const orderHelpers = (connection:any, tableName: string) => {
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
+        getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: OrderTypeNew) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
     }

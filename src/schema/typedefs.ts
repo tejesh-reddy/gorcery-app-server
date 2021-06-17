@@ -16,7 +16,7 @@ export const typedefs = gql`
         username: String
         email_id: String
         address: Address
-        orders: Order[]
+        orders: [Order!]
     }
  
     type Category {
