@@ -31,7 +31,7 @@ export const toUserArray = (data: any[]) : UserType[] => {
 }
 
 export const toGql = (data: UserType): UserGqlType => {
-    let UserGqlObject:UserGqlType = {...data, address:null};
+    let UserGqlObject:UserGqlType = {...data, address:null, orders: []};
 
     return UserGqlObject;
 }

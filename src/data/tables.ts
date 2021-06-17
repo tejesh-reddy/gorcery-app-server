@@ -14,11 +14,6 @@ const TableDefs:TableDefType[] = [
         name VARCHAR(20),
         PRIMARY KEY(id)`
     },
-    {  
-        name: "orders",
-        def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        status VARCHAR(10)`
-    },
     {
         name: "address",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
@@ -36,6 +31,14 @@ const TableDefs:TableDefType[] = [
         address INT NOT NULL,
         CONSTRAINT FOREIGN KEY FK_Address (address)
         REFERENCES address(id)`
+    },
+    {  
+        name: "orders",
+        def: `id INT PRIMARY KEY AUTO_INCREMENT,
+        status VARCHAR(10),
+        user_id INT,
+        CONSTRAINT FOREIGN KEY FK_User (user_id)
+        REFERENCES user(id)`
     },
     {
         name:"grocery",

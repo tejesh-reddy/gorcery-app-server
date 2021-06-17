@@ -13,6 +13,7 @@ export type CategoryType = {
 
 export type OrderTypeNew = {
     status: string,
+    user_id: number,
 };
 
 export type OrderType = {id:number} & OrderTypeNew;

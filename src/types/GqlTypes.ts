@@ -6,6 +6,6 @@ export type OrderGqlType = OrderType & {items: GroceryGqlType[]};
 
 export type CategoryGqlType = CategoryType & {groceries: GroceryGqlType[]}
 
-export type UserGqlType = UserType & {address: AddressGqlType};
+export type UserGqlType = UserType & {address: AddressGqlType, orders: OrderGqlType[]};
 
 export type AddressGqlType = AddressType;
