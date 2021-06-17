@@ -11,6 +11,27 @@ export const typedefs = gql`
         ${Queries.CategoryQueries}
     }
 
+    type User {
+        id: Int!
+        username: String
+        email_id: String
+        address: Address
+        orders: Order[]
+    }
+ 
+    type Category {
+        id: Int!
+        name: String
+        groceries: [Grocery!]
+    }
+
+    type Address {
+        house_no: String
+        street: String
+        city: String
+        postal_code: Int
+    }
+
     type Grocery {
         name: String
         cost: Int
@@ -22,26 +43,7 @@ export const typedefs = gql`
         id: Int
         status: String
         items: [Grocery!]
+        user_id: Int!
     }
 
-    type Category {
-        id: Int!
-        name: String
-        groceries: [Grocery!]
-    }
-
-
-    type Address {
-        house_no: String
-        street: String
-        city: String
-        postal_code: Int
-    }
-
-    type User {
-        id: Int!
-        username: String
-        email_id: String
-        address: Address
-    }
 `

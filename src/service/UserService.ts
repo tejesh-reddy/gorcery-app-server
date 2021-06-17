@@ -1,6 +1,6 @@
-import { addressAccess, userAccess } from "../data";
+import { addressAccess, orderAccess, userAccess } from "../data";
 import { toGql } from "../data/accessHelpers/UserData";
-import { AddressType } from "../types/DomainTypes";
+import { join } from "./serviceHelpers";
 
 
 async function attachAddress(user: any) {
@@ -9,6 +9,12 @@ async function attachAddress(user: any) {
     userGql.address = address;
 
     return userGql;
+}
+
+async function attachOrders(user: any) {
+    let userGql = toGql(user);
+    let result = join(userGql, orderAccess, "user_id", "orders", "user_id");
+    return result;  
 }
 
 async function attachAddressToUsers(users: any[]) {
@@ -21,14 +27,30 @@ async function attachAddressToUsers(users: any[]) {
     return result;
 }
 
+async function attachOrdersToUsers(users: any[]) {
+    let result = [];
+
+    for(let user of users) {
+        result.push(await attachOrders(user));
+    }
+
+    return result;
+}
+
 export function getAllUsers() {
-    return userAccess.getAll().then(attachAddressToUsers)
+    return userAccess.getAll()
+    .then(attachAddressToUsers)
+    .then(attachOrdersToUsers);
 }
 
 export function getUserById(id: number) {
-    return userAccess.getById(id).then(attachAddress);
+    return userAccess.getById(id)
+    .then(attachAddress)
+    .then(attachOrders);
 }
 
 export function getUserByUsername(name: string) {
-    return userAccess.getByUsername(name).then(attachAddress)
+    return userAccess.getByUsername(name)
+    .then(attachAddress)
+    .then(attachOrders);
 }
