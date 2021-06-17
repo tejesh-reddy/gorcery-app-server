@@ -1,8 +1,8 @@
-import { Resolvers } from "./schemaData";
+import { QueryResolvers } from "./schemaData";
 
 export const resolvers = {
     Query: {
-        ...Resolvers,
+        ...QueryResolvers,
     }
 };
 

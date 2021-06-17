@@ -1,7 +1,8 @@
-import { UserQueries, UserResolvers } from './user';
-import { GroceryQueries, GroceryResolvers } from './grocery';
-import { OrderQueries, OrderResolvers } from './order';
-import { CategoryQueries, CategoryResolvers } from './category';
+import { CategoryQueries, CategoryQueryResolvers } from "./category"
+import { GroceryQueries, GroceryQueryResolvers } from "./grocery"
+import { OrderQueries, OrderQueryResolvers } from "./order"
+import { UserQueries, UserQueryResolvers } from "./user"
+
 
 export const Queries = {
     GroceryQueries,
@@ -10,9 +11,9 @@ export const Queries = {
     CategoryQueries,
 }
 
-export const Resolvers = {
-    ...OrderResolvers,
-    ...GroceryResolvers,
-    ...UserResolvers,
-    ...CategoryResolvers
+export const QueryResolvers = {
+    ...OrderQueryResolvers,
+    ...GroceryQueryResolvers,
+    ...UserQueryResolvers,
+    ...CategoryQueryResolvers,
 }

@@ -7,7 +7,7 @@ export const UserQueries = `
     userById(id: Int!): User
 `;
 
-export const UserResolvers = {
+export const UserQueryResolvers = {
     me: () => "should be currently logged in",
     users: () => getAllUsers(),
     userByUsername: (_:unknown, {username} : {username: string}) => getUserByUsername(username),

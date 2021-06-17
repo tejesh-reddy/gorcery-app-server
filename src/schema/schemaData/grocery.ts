@@ -7,7 +7,7 @@ export const GroceryQueries = `
     groceryById(id: Int!): Grocery
 `;
 
-export const GroceryResolvers = {
+export const GroceryQueryResolvers = {
     grocery: async function(_:unknown, { name }: {name: string}) {
         let result = {}
         await getGroceryByName(name).then(data => result=data);

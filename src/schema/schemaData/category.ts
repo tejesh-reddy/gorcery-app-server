@@ -5,7 +5,7 @@ export const CategoryQueries = `
     categoryById(id: Int!): Category!
 `;
 
-export const CategoryResolvers = {
+export const CategoryQueryResolvers = {
     categories: () => getAllCategories(),
     categoryById: (_:unknown, {id}: {id: number}) => getCategoryById(id),
 }
