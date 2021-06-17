@@ -22,11 +22,10 @@ const TableDefs:TableDefType[] = [
         city VARCHAR(15),
         postal_code INT`
     },
-    {
-        name: "cart",
+    {  
+        name: "orders",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        c`
-
+        status VARCHAR(10)`
     },
     {
         name: "user",
@@ -34,17 +33,12 @@ const TableDefs:TableDefType[] = [
         username VARCHAR(30) NOT NULL,
         password VARCHAR(70) NOT NULL,
         email_id VARCHAR(30) NOT NULL,
-        address INT NOT NULL
+        address INT NOT NULL,
         cart_id INT,
         CONSTRAINT FOREIGN KEY FK_Address (address)
-        REFERENCES address(id)
-        CONSTRAINT FOREIGN_KEY FK_Cart (cart_id)
+        REFERENCES address(id),
+        CONSTRAINT FOREIGN KEY FK_Cart (cart_id)
         REFERENCES orders(id)`
-    },
-    {  
-        name: "orders",
-        def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        status VARCHAR(10),`
     },
     {
         name: "user_orders",
@@ -53,8 +47,8 @@ const TableDefs:TableDefType[] = [
         PRIMARY KEY(user_id, order_id),
         CONSTRAINT FOREIGN KEY FK_User (user_id)
         REFERENCES user(id),
-        CONSTRAINT FOREIGN_KEY FK_Order (order_id)
-        REFERENCES order(id)`
+        CONSTRAINT FOREIGN KEY FK_OrderID (order_id)
+        REFERENCES orders(id)`
     },
     {
         name:"grocery",
