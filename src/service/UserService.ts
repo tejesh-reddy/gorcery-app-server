@@ -14,7 +14,7 @@ async function attachAddress(user: any) {
 }
 
 async function attachOrders(user: UserGqlType) {
-    const result = join(user, userOrderAccess, getOrderById, "user_id", "orders", "user_id");
+    const result = await join(user, userOrderAccess, getOrderById, "user_id", "orders", "user_id");
     return result;  
 }
 
@@ -22,7 +22,7 @@ async function attachCart(user: UserGqlType) {
     const cart:any = await orderAccess.getById(user.cart as number);
     user.cart = cart;
 
-    return cart;
+    return user;
 }
 
 async function attachCartToUsers(users: any[]) {
@@ -31,6 +31,7 @@ async function attachCartToUsers(users: any[]) {
     for(let user of users) {
         result.push(await attachCart(user));
     }
+
 
     return result;
 }

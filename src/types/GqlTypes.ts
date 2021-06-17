@@ -2,7 +2,9 @@ import { AddressType, CategoryType, GroceryType, OrderType, UserType } from "./D
 
 export type GroceryGqlType = GroceryType;
 
-export type OrderGqlType = OrderType & {items: GroceryGqlType[]};
+export type ItemGqlType = {quantity: number} & GroceryGqlType;
+
+export type OrderGqlType = OrderType & {items: ItemGqlType[]};
 
 export type CategoryGqlType = CategoryType & {groceries: GroceryGqlType[]}
 

@@ -12,7 +12,7 @@ export const typedefs = gql`
     }
 
     type User {
-        id: Int!
+        id: Int
         username: String
         email_id: String
         address: Address
@@ -32,6 +32,11 @@ export const typedefs = gql`
         postal_code: Int
     }
 
+    type Item {
+        grocery: Grocery!
+        quantity: Int!
+    }
+
     type Grocery {
         name: String
         cost: Int
@@ -42,7 +47,7 @@ export const typedefs = gql`
     type Order {
         id: Int
         status: String
-        items: [Grocery!]
+        items: [Item!]
         user_id: Int!
     }
 

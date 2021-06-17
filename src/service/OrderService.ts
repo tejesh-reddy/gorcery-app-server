@@ -3,13 +3,16 @@ import { toGql } from "../data/accessHelpers/GroceryData";
 import { OrderType } from "../types/DomainTypes";
 import { OrderGqlType } from "../types/GqlTypes";
 import { getGroceryById } from "./GroceryService";
+import { getItemWithQuantity } from "./orderItemsService";
 import { join } from "./serviceHelpers";
 
 const Orders:any[] = [];
 
 async function attachItems(order:any) {
     let orderGql = toGql(order);
-    let result = join(orderGql, orderItemsAccess, getGroceryById, "order_id", "items", "grocery_id");
+    let result = join(orderGql, orderItemsAccess, (groceryId: number) => getItemWithQuantity(orderGql.id, groceryId), "order_id", "items", "grocery_id");
+
+    
     return result;     
 }
 
