@@ -24,6 +24,11 @@ export type OrderItemsType = {
     quantity:number,
 }
 
+export type UserOrderType = {
+    user_id:number,
+    order_id:number,
+}
+
 export type UserType = {
     id: number,
     username: string,
