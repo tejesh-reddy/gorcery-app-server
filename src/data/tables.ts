@@ -23,22 +23,38 @@ const TableDefs:TableDefType[] = [
         postal_code INT`
     },
     {
+        name: "cart",
+        def: `id INT PRIMARY KEY AUTO_INCREMENT,
+        c`
+
+    },
+    {
         name: "user",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
         username VARCHAR(30) NOT NULL,
         password VARCHAR(70) NOT NULL,
         email_id VARCHAR(30) NOT NULL,
-        address INT NOT NULL,
+        address INT NOT NULL
+        cart_id INT,
         CONSTRAINT FOREIGN KEY FK_Address (address)
-        REFERENCES address(id)`
+        REFERENCES address(id)
+        CONSTRAINT FOREIGN_KEY FK_Cart (cart_id)
+        REFERENCES orders(id)`
     },
     {  
         name: "orders",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        status VARCHAR(10),
-        user_id INT,
+        status VARCHAR(10),`
+    },
+    {
+        name: "user_orders",
+        def: `user_id INT NOT NULL,
+        order_id INT NOT NULL,
+        PRIMARY KEY(user_id, order_id),
         CONSTRAINT FOREIGN KEY FK_User (user_id)
-        REFERENCES user(id)`
+        REFERENCES user(id),
+        CONSTRAINT FOREIGN_KEY FK_Order (order_id)
+        REFERENCES order(id)`
     },
     {
         name:"grocery",
