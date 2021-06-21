@@ -14,6 +14,8 @@ passport.use(
                 return callback(null, false);
             }
 
+            console.log(user);
+
             validatePassword(password, user.passwordHash)
             .then(match => {
                 if(match) {

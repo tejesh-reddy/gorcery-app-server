@@ -38,7 +38,7 @@ app.get("/", () => "logged in")
 // Authentication route
 app.post(
     "/login",
-    passport.authenticate("local", { failureRedirect: "/login" }),
+    passport.authenticate("local"),
     (err: any, req: any, res: any, next: any) => {
       if (err) next(err);
       console.log("You are logged in!");

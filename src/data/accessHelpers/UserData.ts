@@ -14,13 +14,14 @@ export const toUser = (data: any) :UserType => {
         };
     }
 
+
     let user:UserType = {
         id: data.id,
         username: data.username,
         email_id: data.email_id,
         address_id: data.address,
         cart_id: data.cart_id,
-        passwordHash: data.password,
+        passwordHash: data.passwordHash,
     }
     return user;
 }
