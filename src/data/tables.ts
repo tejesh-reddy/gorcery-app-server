@@ -1,4 +1,4 @@
-import { getDataPromise } from "../helpers/dataPromise";
+import { getDataPromise, getInsertIdPromise } from "../helpers/dataPromise";
 import { getFromObjectArray } from "../helpers/getFromArray";
 
 export type TableDefType = {
@@ -31,9 +31,9 @@ const TableDefs:TableDefType[] = [
         name: "user",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
         username VARCHAR(30) NOT NULL,
-        password VARCHAR(70) NOT NULL,
+        passwordHash VARCHAR(70) NOT NULL,
         email_id VARCHAR(30) NOT NULL,
-        address INT NOT NULL,
+        address INT,
         cart_id INT,
         CONSTRAINT FOREIGN KEY FK_Address (address)
         REFERENCES address(id),
@@ -91,6 +91,10 @@ export function createTables(connection:any) {
 
 export const executeQuery = (connection: any, tableName: string, query: string, serializer: any, dataPromise=getDataPromise) => {
     return dataPromise(connection, query, serializer);
+}
+
+export const executeInsert = (connection: any, query: string, idPromise=getInsertIdPromise) => {
+    return idPromise(connection, query);
 }
 
 export const getTableDef = (tablename:string) => getFromObjectArray<TableDefType>(TableDefs, "name", tablename);

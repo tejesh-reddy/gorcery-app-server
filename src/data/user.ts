@@ -1,10 +1,11 @@
-import { getDataArrayPromise } from "../helpers/dataPromise";
+import { getDataArrayPromise, getInsertIdPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
+import { UserTypeNew } from "../types/DomainTypes";
 import { UserGqlType } from "../types/GqlTypes";
 import { NoSerializor } from "./accessHelpers";
 import { toUser, toUserArray } from "./accessHelpers/UserData";
 import { queries } from "./Queries";
-import { executeQuery, getTableDef } from "./tables";
+import { executeInsert, executeQuery, getTableDef } from "./tables";
 
 
 export const userHelpers = (connection:any, tableName: string) => {
@@ -23,6 +24,6 @@ export const userHelpers = (connection:any, tableName: string) => {
         getByToken: (token: string) => singleAccessor(Queries.getByField("token", token)),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
-        insertOne: (value: UserGqlType) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
+        insertOne: (value: UserTypeNew) => executeInsert(connection, Queries.insert(value, tableFields), getInsertIdPromise),
     }
 }

@@ -1,4 +1,4 @@
-import { getAllUsers, getUserById, getUserByUsername } from "../../service/UserService";
+import { addUser, getAllUsers, getUserById, getUserByUsername } from "../../service/UserService";
 
 export const UserQueries = `
     user: User!
@@ -8,10 +8,19 @@ export const UserQueries = `
     logout: String
 `;
 
+export const UserMutations = `
+    signup(username: String! password: String! email: String!): User!
+    logout: String
+`
+
 export const UserQueryResolvers = {
     user: (_:unknown, args: any, context: any) => context.getUser(),
     logout: (_:unknown, args: any, context: any) => context.logout(),
     users: () => getAllUsers(),
     userByUsername: (_:unknown, {username} : {username: string}) => getUserByUsername(username),
     userById: (_:unknown, {id}: {id: number}) => getUserById(id)
+}
+
+export const UserMutationResolvers = {
+    signup: (_:unknown, {username, password, email} : {username: string, password: string, email: string}) => addUser(username, password, email)
 }

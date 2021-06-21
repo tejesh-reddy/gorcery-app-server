@@ -1,4 +1,4 @@
-import { UserType } from "../../types/DomainTypes";
+import { UserType, UserTypeNew } from "../../types/DomainTypes";
 import { UserGqlType } from "../../types/GqlTypes";
 
 export const toUser = (data: any) :UserType => {
@@ -38,4 +38,14 @@ export const toGql = (data: UserType): UserGqlType => {
     let UserGqlObject:UserGqlType = {...data, address: data.address_id, orders: [], cart: data.cart_id};
 
     return UserGqlObject;
+}
+
+export const getUserObject = (username: string, email_id: string) : UserTypeNew => {
+    return {
+        username: username,
+        passwordHash: null,
+        email_id: email_id,
+        address_id: null,
+        cart_id: null,
+    }
 }

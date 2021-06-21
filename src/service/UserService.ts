@@ -1,5 +1,7 @@
+import { encryptPassword } from "../auth/password";
 import { addressAccess, orderAccess, userAccess, userOrderAccess } from "../data";
-import { toGql } from "../data/accessHelpers/UserData";
+import { getUserObject, toGql } from "../data/accessHelpers/UserData";
+import { UserType, UserTypeNew } from "../types/DomainTypes";
 import { UserGqlType } from "../types/GqlTypes";
 import { getOrderById } from "./OrderService";
 import { join } from "./serviceHelpers";
@@ -76,4 +78,11 @@ export function getUserByUsername(name: string) {
     .then(attachAddress)
     .then(attachOrders)
     .then(attachCart);
+}
+
+export async function addUser(username: string, password: string, email: string) {
+    let user = getUserObject(username, email);
+    user.passwordHash = await encryptPassword(password);
+    const result = await userAccess.insertOne(user);
+    return {id: result};
 }

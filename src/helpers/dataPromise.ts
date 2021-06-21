@@ -24,3 +24,14 @@ export const getDataArrayPromise = (connection:any, sql:any, operation:any) => {
 })
 }
 
+export function getInsertIdPromise(connection: any, sql: any) {
+    return new Promise((resolve) => {
+        connection.query(sql, (err: unknown, result: any) => {
+            if(err) {
+                console.log('Error adding to DB -- INSERT');
+                throw err;
+            }
+            return resolve(result.insertId);
+        })
+    });
+}

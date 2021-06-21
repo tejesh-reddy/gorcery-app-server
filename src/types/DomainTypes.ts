@@ -29,14 +29,15 @@ export type UserOrderType = {
     order_id:number,
 }
 
-export type UserType = {
-    id: number,
+export type UserTypeNew = {
     username: string,
     email_id: string,
     address_id: number,
     cart_id: number,
     passwordHash: string,
 }
+
+export type UserType = {id: number} & UserTypeNew;
 
 export type AddressType = {
     house_no: string,

@@ -8,7 +8,7 @@ export const queries = (tablename: string) => {
         let query = '(';
         let values ='('
         for(let field of fieldnames) {
-            if(value[field] !== undefined){
+            if(value[field] !== undefined && value[field] !== null){
                 query += `${field}, `
                 if(typeof value[field] === 'number')
                     values += ""+value[field]+", ";
@@ -23,7 +23,6 @@ export const queries = (tablename: string) => {
         return {
             query,
             values,
-
         }
     }
 
