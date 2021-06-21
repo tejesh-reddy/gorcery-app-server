@@ -2,18 +2,23 @@
 
 export const queries = (tablename: string) => {
 
-    const selectAll = (tablename: string) => `SELECT * FROM ${tablename}`;
+    const selectAll =`SELECT * FROM ${tablename}`;
+    const deleteEntry = `DELETE FROM ${tablename}`;
+
+    const getValue = (value: number|string) => {
+
+        if(typeof value === 'number')
+            return `${value}`;
+        return `'${value}'`
+    }
 
     const fieldsToValues = (value: any, fieldnames: string[]) => {
         let query = '(';
         let values ='('
         for(let field of fieldnames) {
             if(value[field] !== undefined && value[field] !== null){
-                query += `${field}, `
-                if(typeof value[field] === 'number')
-                    values += ""+value[field]+", ";
-                else
-                    values += "'" + value[field]+"', "
+                query += `${field}, `;
+                values += getValue(value[field]) + ", ";
             }
         }
 
@@ -33,19 +38,29 @@ export const queries = (tablename: string) => {
     }
 
     return {
-        getAll: () => selectAll(tablename),
+        getAll: () => selectAll,
         getById: (id:number|string) => {
             if(typeof id === 'number')
-                return `${selectAll(tablename)} WHERE id=${id}`;
-            return `${selectAll(tablename)} WHERE id='${id}'`;
+                return `${selectAll} WHERE id=${id}`;
+            return `${selectAll} WHERE id='${id}'`;
         },
         getByField: (fieldname:string, value: number|string) => {
             if(typeof value === 'number')
-                return `${selectAll(tablename)} WHERE ${fieldname}=${value}`;
-            return `${selectAll(tablename)} WHERE ${fieldname}='${value}'`;
+                return `${selectAll} WHERE ${fieldname}=${value}`;
+            return `${selectAll} WHERE ${fieldname}='${value}'`;
         },
 
         insert: insertOne,
+
+        delete: (id: number|string) => `${deleteEntry} WHERE id=${getValue(id)}`,
+
+        deleteOnFields: (field1: string, value1: number|string, field2: string, value2: number|tring) => `${deleteEntry} 
+        WHERE ${field1}=${getValue(value1)} 
+        AND ${field2}=${getValue(value2)}`,
+
+        update: (id: number|string, field:string, value:string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
+        WHERE id=${id}`,
+
 
     };
 };

@@ -5,6 +5,7 @@ export const OrderQueries = `
     orderById(id:Int!): Order
 `;
 
+
 export const OrderQueryResolvers = {
     orders: () => getAllOrders(),
     orderById: (_:unknown, {id}:{id: number}) => getOrderById(id),
