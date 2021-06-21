@@ -9,14 +9,12 @@ export const toOrder = (data: any) => {
         return {
             id: null,
             status: null,
-            user_id: null,
         };
     }
 
     let order:OrderType = {
         id: data.id,
         status: data.status,
-        user_id: data.user_id,
     }
     return order;
 }

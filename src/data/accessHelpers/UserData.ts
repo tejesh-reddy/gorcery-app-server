@@ -9,7 +9,8 @@ export const toUser = (data: any) :UserType => {
             username: null,
             email_id: null,
             address_id: null,
-            cart_id: null
+            cart_id: null,
+            passwordHash: null,
         };
     }
 
@@ -18,7 +19,8 @@ export const toUser = (data: any) :UserType => {
         username: data.username,
         email_id: data.email_id,
         address_id: data.address,
-        cart_id: data.cart_id
+        cart_id: data.cart_id,
+        passwordHash: data.password,
     }
     return user;
 }

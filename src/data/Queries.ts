@@ -29,7 +29,6 @@ export const queries = (tablename: string) => {
 
     function insertOne(value:any, fieldNames: string[]):string {
         let {query, values} = fieldsToValues(value, fieldNames);
-        console.log(`INSERT INTO ${tablename} ${query} VALUES ${values}`);
 
         return `INSERT INTO ${tablename} ${query} VALUES ${values}`
     }
@@ -37,7 +36,9 @@ export const queries = (tablename: string) => {
     return {
         getAll: () => selectAll(tablename),
         getById: (id:number|string) => {
-            return `${selectAll(tablename)} WHERE id=${id}`
+            if(typeof id === 'number')
+                return `${selectAll(tablename)} WHERE id=${id}`;
+            return `${selectAll(tablename)} WHERE id='${id}'`;
         },
         getByField: (fieldname:string, value: number|string) => {
             if(typeof value === 'number')

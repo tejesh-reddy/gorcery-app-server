@@ -4,6 +4,7 @@ export type GroceryTypeNew = {
     category_id: number,
 }
 
+
 export type GroceryType = {id: number} & GroceryTypeNew;
 
 export type CategoryType = {
@@ -34,6 +35,7 @@ export type UserType = {
     email_id: string,
     address_id: number,
     cart_id: number,
+    passwordHash: string,
 }
 
 export type AddressType = {

@@ -13,6 +13,7 @@ async function attachAddress(user: any) {
     return userGql;
 }
 
+
 async function attachOrders(user: UserGqlType) {
     const result = await join(user, userOrderAccess, getOrderById, "user_id", "orders", "user_id");
     return result;  
