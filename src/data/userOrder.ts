@@ -4,7 +4,7 @@ import { UserOrderType } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
 import { toUserOrders, toUserOrdersArray } from "./accessHelpers/userOrdersData";
 import { queries } from "./Queries";
-import { executeQuery, getTableDef } from "./tables";
+import { executeInsert, executeQuery, getTableDef } from "./tables";
 
 
 
@@ -22,6 +22,6 @@ export const userOrderHelpers = (connection:any, tableName: string) => {
         getAll: () => arrayAccessor(Queries.getAll()),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
-        insertOne: (value: UserOrderType) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
+        insertOne: (value: UserOrderType) => executeInsert(connection, Queries.insert(value, tableFields)),
     }
 }

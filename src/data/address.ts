@@ -4,7 +4,7 @@ import { AddressType } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
 import { toAddress, toAddressArray } from "./accessHelpers/AddressData";
 import { queries } from "./Queries";
-import { executeQuery, getTableDef } from "./tables";
+import { executeInsert, executeQuery, getTableDef } from "./tables";
 
 export const addressHelpers = (connection:any, tableName: string) => {
 
@@ -19,6 +19,6 @@ export const addressHelpers = (connection:any, tableName: string) => {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
 
-        insertOne: (value: AddressType) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
+        insertOne: (value: AddressType) => executeInsert(connection, Queries.insert(value, tableFields)),
     }
 }

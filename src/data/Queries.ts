@@ -1,16 +1,26 @@
+export type fieldsType = {
+    field1: string,
+    value1: string|number,
+    field2: string,
+    value2: string|number,
+}
 
+const getValue = (value: number|string) => {
+
+    if(typeof value === 'number')
+        return `${value}`;
+    return `'${value}'`
+}
+
+const matchFields = (fields: fieldsType) => {
+    return `${fields.field1}=${fields.value1} AND ${fields.field2}=${fields.value2}`
+}
 
 export const queries = (tablename: string) => {
 
     const selectAll =`SELECT * FROM ${tablename}`;
     const deleteEntry = `DELETE FROM ${tablename}`;
 
-    const getValue = (value: number|string) => {
-
-        if(typeof value === 'number')
-            return `${value}`;
-        return `'${value}'`
-    }
 
     const fieldsToValues = (value: any, fieldnames: string[]) => {
         let query = '(';
@@ -54,12 +64,14 @@ export const queries = (tablename: string) => {
 
         delete: (id: number|string) => `${deleteEntry} WHERE id=${getValue(id)}`,
 
-        deleteOnFields: (field1: string, value1: number|string, field2: string, value2: number|tring) => `${deleteEntry} 
-        WHERE ${field1}=${getValue(value1)} 
-        AND ${field2}=${getValue(value2)}`,
+        deleteOnFields: (fields: fieldsType) => `${deleteEntry} 
+        WHERE ${matchFields(fields)}`,
 
         update: (id: number|string, field:string, value:string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
         WHERE id=${id}`,
+
+        updateOnFields: (fields:fieldsType, field:string, value:number|string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
+        WHERE ${matchFields(fields)}`,
 
 
     };

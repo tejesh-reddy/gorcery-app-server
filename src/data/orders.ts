@@ -4,7 +4,7 @@ import { OrderTypeNew } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
 import {  toOrder, toOrdersArray } from "./accessHelpers/OrderData";
 import { queries } from "./Queries";
-import { executeQuery, getTableDef } from "./tables";
+import { executeInsert, executeQuery, getTableDef } from "./tables";
 
 
 export const orderHelpers = (connection:any, tableName: string) => {
@@ -21,7 +21,7 @@ export const orderHelpers = (connection:any, tableName: string) => {
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
         orderOfUser: (userId: number) => arrayAccessor(Queries.getByField("user_id", userId)),
 
-        insertOne: (value: OrderTypeNew) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
+        insertOne: (value: OrderTypeNew) => executeInsert(connection, Queries.insert(value, tableFields)),
     }
 
 }

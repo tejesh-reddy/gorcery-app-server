@@ -4,7 +4,7 @@ import { GroceryTypeNew } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
 import { toGrocery, toGroceryArray } from "./accessHelpers/GroceryData";
 import { queries } from "./Queries";
-import { executeQuery, getTableDef } from "./tables";
+import { executeInsert, executeQuery, getTableDef } from "./tables";
 
 
 
@@ -24,6 +24,6 @@ export const groceryHelpers = (connection:any, tableName: string) => {
         getByName: (name: string) => singleAccessor(Queries.getByField("name", name)),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
-        insertOne: (value: GroceryTypeNew) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
+        insertOne: (value: GroceryTypeNew) => executeInsert(connection, Queries.insert(value, tableFields)),
     }
 }

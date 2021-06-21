@@ -4,7 +4,7 @@ import { CategoryType } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
 import { toCategory, toCategoryArray } from "./accessHelpers/CategoryData";
 import { queries } from "./Queries";
-import { executeQuery, getTableDef } from "./tables";
+import { executeInsert, executeQuery, getTableDef } from "./tables";
 
 
 export const categoryHelpers = (connection: any, tableName: string) => {
@@ -20,6 +20,6 @@ export const categoryHelpers = (connection: any, tableName: string) => {
         getById: (id: number) => singleAccessor(Queries.getById(id)),
         getByName: (name: string) => singleAccessor(Queries.getByField("name", name)),
 
-        insertOne: (value: CategoryType) => executeQuery(connection, tableName, Queries.insert(value, tableFields), NoSerializor),
+        insertOne: (value: CategoryType) => executeInsert(connection, Queries.insert(value, tableFields)),
     }
 }
