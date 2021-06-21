@@ -57,12 +57,16 @@ export const typedefs = gql`
     type Order {
         status: String
         items: [Item!]
-        user_id: Int!
     }
 
     input OrderInput {
         status: String
-        items: [Item!]
+        items: [ItemInput!]
+    }
+
+    input ItemInput {
+        grocery_id: Int!
+        quantity: Int!
     }
 
 `

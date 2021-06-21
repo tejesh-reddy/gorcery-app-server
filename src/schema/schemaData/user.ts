@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server-express";
 import { authorizeUser } from "../../auth/authorizeUser";
-import { addUser, getAllUsers, getUserById, getUserByUsername } from "../../service/UserService";
+import { addUser, getAllUsers, getUserById, getUserByUsername, updateUserCart } from "../../service/UserService";
 import { OrderTypeNew } from "../../types/DomainTypes";
 
 export const UserQueries = `
@@ -26,5 +26,5 @@ export const UserQueryResolvers = {
 export const UserMutationResolvers = {
     signup: (_:unknown, {username, password, email} : {username: string, password: string, email: string}) => addUser(username, password, email),
     logout: (_:unknown, args: any, context: any) => context.logout(),
-    updateCart: (_:unknown, { cart }:{cart: any}, context: any) => authorizeUser(context.getUser()).then(user => updateUserCart(user, cart));
+    updateCart: (_:unknown, { cart }:{cart: any}, context: any) => authorizeUser(context.getUser()).then(user => updateUserCart(user, cart)),
 }

@@ -93,7 +93,7 @@ export const executeQuery = (connection: any, tableName: string, query: string, 
     return dataPromise(connection, query, serializer);
 }
 
-export const executeInsert = (connection: any, query: string, idPromise=getInsertIdPromise) => {
+export const executeInsert = (connection: any, query: string, idPromise=getInsertIdPromise):Promise<any> => {
     return idPromise(connection, query);
 }
 

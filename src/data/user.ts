@@ -25,5 +25,6 @@ export const userHelpers = (connection:any, tableName: string) => {
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: UserTypeNew) => executeInsert(connection, Queries.insert(value, tableFields), getInsertIdPromise),
+        updateCart: (id: number, cart_id: number) => executeInsert(connection, Queries.update(id, "cart_id", cart_id)),
     }
 }

@@ -28,10 +28,22 @@ export function getInsertIdPromise(connection: any, sql: any) {
     return new Promise((resolve) => {
         connection.query(sql, (err: unknown, result: any) => {
             if(err) {
-                console.log('Error adding to DB -- INSERT');
+                console.log('Error adding to DB -- INSERT', sql);
                 throw err;
             }
             return resolve(result.insertId);
         })
     });
+}
+
+export function plainDataPromise(connection: any, sql: any) {
+    return new Promise((resolve) => {
+        connection.query(sql, (err: unknown, result: any) => {
+            if(err){
+                console.log('Error executing query -- ', sql);
+                throw err;
+            }
+            return resolve(result);
+        })
+    })
 }

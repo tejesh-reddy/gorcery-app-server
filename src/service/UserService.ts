@@ -2,8 +2,8 @@ import { encryptPassword } from "../auth/password";
 import { addressAccess, orderAccess, userAccess, userOrderAccess } from "../data";
 import { getUserObject, toGql } from "../data/accessHelpers/UserData";
 import { UserType, UserTypeNew } from "../types/DomainTypes";
-import { UserGqlType } from "../types/GqlTypes";
-import { getOrderById } from "./OrderService";
+import { OrderGqlType, UserGqlType } from "../types/GqlTypes";
+import { createOrder, getOrderById, updateOrder } from "./OrderService";
 import { join } from "./serviceHelpers";
 
 
@@ -85,4 +85,25 @@ export async function addUser(username: string, password: string, email: string)
     user.passwordHash = await encryptPassword(password);
     const result = await userAccess.insertOne(user);
     return {id: result};
+}
+
+export async function createCart(user: UserType, cart: any) {
+    const order = await createOrder("cart", cart.items);
+
+    user.cart_id = order.id;
+    userAccess.updateCart(user.id, user.cart_id);
+    return order;
+}
+
+
+export async function updateUserCart(user: UserType, cart: any) {
+
+    if(user.cart_id == null){
+        return createCart(user, cart);
+    }
+    
+    let new_order = await updateOrder(user.cart_id, cart.items);
+
+
+    return new_order;
 }

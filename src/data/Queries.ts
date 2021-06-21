@@ -63,12 +63,15 @@ export const queries = (tablename: string) => {
         insert: insertOne,
 
         delete: (id: number|string) => `${deleteEntry} WHERE id=${getValue(id)}`,
+        deleteOnField: (field: string, value: string|number) => {
+            return `${deleteEntry} WHERE ${field}=${getValue(value)}`;
+        },
 
-        deleteOnFields: (fields: fieldsType) => `${deleteEntry} 
-        WHERE ${matchFields(fields)}`,
+        deleteOnFields: (fields: fieldsType) => {
+            return `${deleteEntry} WHERE ${matchFields(fields)}`},
 
-        update: (id: number|string, field:string, value:string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
-        WHERE id=${id}`,
+        update: (id: number|string, field:string, value:number|string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
+        WHERE id=${getValue(id)}`,
 
         updateOnFields: (fields:fieldsType, field:string, value:number|string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
         WHERE ${matchFields(fields)}`,

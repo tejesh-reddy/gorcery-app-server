@@ -1,5 +1,7 @@
 import { groceryAccess, orderItemsAccess } from "../data";
 import { getFromObjectArray } from "../helpers/getFromArray";
+import { getOrderById } from "./OrderService";
+
 
 
 export async function getItemWithQuantity(orderId: number, groceryId: number) {
@@ -12,4 +14,25 @@ export async function getItemWithQuantity(orderId: number, groceryId: number) {
         grocery,
         quantity
     }
+}
+
+export async function deleteOrderItems(order_id: number){
+    const res = await orderItemsAccess.removeOrder(order_id);
+
+    const orderItems =  await orderItemsAccess.getAll();
+    return res;
+}
+
+export async function addOrderItems(order_id: number, items: any[]){
+    const promises:Promise<any>[] = []
+    items.forEach(async (item: any) => {
+        const itemFormat = {
+            order_id: order_id,
+            grocery_id: item.grocery_id,
+            quantity: item.quantity,
+        };
+
+        await orderItemsAccess.insertOne(itemFormat);
+    })
+    await Promise.all(promises);
 }

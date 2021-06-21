@@ -1,4 +1,4 @@
-import { getDataArrayPromise, getInsertIdPromise } from "../helpers/dataPromise";
+import { getDataArrayPromise, getInsertIdPromise, plainDataPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
 import { OrderItemsType } from "../types/DomainTypes";
 import { NoSerializor } from "./accessHelpers";
@@ -33,11 +33,13 @@ export const orderItemsHelpers = (connection:any, tableName: string) => {
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: OrderItemsType) => executeInsert(connection, Queries.insert(value, tableFields)),
+
         removeGrocery: (order_id: number, grocery_id: number) => {  
-            return executeInsert(connection, Queries.deleteOnFields(getFields(order_id, grocery_id)), NoSerializor);
+            return executeInsert(connection, Queries.deleteOnFields(getFields(order_id, grocery_id)), plainDataPromise);
         },
         updateQuantity: (order_id:number, grocery_id:number, newQuantity: number) => {
             return executeInsert(connection, Queries.updateOnFields(getFields(order_id, grocery_id), "quantity", newQuantity)) 
-        }
+        },
+        removeOrder: (order_id: number) => executeInsert(connection, Queries.deleteOnField("order_id", order_id), plainDataPromise),
     };
 }
