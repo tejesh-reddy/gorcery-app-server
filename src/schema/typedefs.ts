@@ -21,12 +21,7 @@ export const typedefs = gql`
         email_id: String
         address: Address
         orders: [Order!]
-    }
-
-    type NewUser {
-        username: String
-        email_id: String
-        address: Address
+        cart: Order
     }
  
     type Category {
@@ -55,6 +50,7 @@ export const typedefs = gql`
     }
 
     type Order {
+        id: Int
         status: String
         items: [Item!]
     }

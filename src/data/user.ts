@@ -26,5 +26,6 @@ export const userHelpers = (connection:any, tableName: string) => {
 
         insertOne: (value: UserTypeNew) => executeInsert(connection, Queries.insert(value, tableFields), getInsertIdPromise),
         updateCart: (id: number, cart_id: number) => executeInsert(connection, Queries.update(id, "cart_id", cart_id)),
+        emptyCart: (id: number) => executeInsert(connection, Queries.updateToNull(id, "cart_id")),
     }
 }

@@ -22,6 +22,7 @@ export const orderHelpers = (connection:any, tableName: string) => {
         orderOfUser: (userId: number) => arrayAccessor(Queries.getByField("user_id", userId)),
 
         insertOne: (value: OrderTypeNew) => executeInsert(connection, Queries.insert(value, tableFields)),
+        updateStatus: (id: number, status: string) => executeInsert(connection, Queries.update(id, "status", status)),
     }
 
 }

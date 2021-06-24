@@ -72,6 +72,7 @@ export const queries = (tablename: string) => {
 
         update: (id: number|string, field:string, value:number|string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
         WHERE id=${getValue(id)}`,
+        updateToNull: (id: number|string, field:string) => `UPDATE ${tablename} SET ${field}=NULL WHERE id=${id}`,
 
         updateOnFields: (fields:fieldsType, field:string, value:number|string) => `UPDATE ${tablename} SET ${field}=${getValue(value)}
         WHERE ${matchFields(fields)}`,

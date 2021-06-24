@@ -1,4 +1,5 @@
-import { MutationResolvers, Mutations, QueryResolvers } from "./schemaData";
+import { getUserAddress } from "../service/UserService";
+import { MutationResolvers, Mutations, QueryResolvers, TypeResolvers } from "./schemaData";
 
 export const resolvers = {
     Query: {
@@ -6,6 +7,8 @@ export const resolvers = {
     },
     Mutation: {
         ...MutationResolvers
-    }
+    },
+
+    ...TypeResolvers,
 };
 

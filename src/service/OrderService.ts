@@ -1,4 +1,4 @@
-import { groceryAccess, orderAccess, orderItemsAccess } from "../data";
+import { groceryAccess, orderAccess, orderItemsAccess, userOrderAccess } from "../data";
 import { toGql } from "../data/accessHelpers/GroceryData";
 import { OrderType, OrderTypeNew } from "../types/DomainTypes";
 import { OrderGqlType } from "../types/GqlTypes";
@@ -10,7 +10,8 @@ const Orders:any[] = [];
 
 async function attachItems(order:any) {
     let orderGql = toGql(order);
-    let result = join(orderGql, orderItemsAccess, (groceryId: number) => getItemWithQuantity(orderGql.id, groceryId), "order_id", "items", "grocery_id");
+    let result = await join(orderGql, orderItemsAccess, (groceryId: number) => getItemWithQuantity(orderGql.id, groceryId), "order_id", "items", "grocery_id");
+
 
     
     return result;     
@@ -21,6 +22,7 @@ async function attachItemsToOrders(orderArray: unknown[]) {
     for(let order of orderArray) {
         result.push(await attachItems(order));
     }
+
 
     return result;
 }
@@ -46,4 +48,17 @@ export async function createOrder(status: string, items: any[]) {
     await addOrderItems(orderId, items);
 
     return getOrderById(orderId);
+}
+
+export async function updateOrderStatus(order_id: number, status: string) {
+    orderAccess.updateStatus(order_id, status)
+}
+
+export async function addOrderToUser(user_id: number, order_id: number) {
+    const userOrder = {
+        user_id, 
+        order_id
+    }
+    await userOrderAccess.insertOne(userOrder);
+    return getOrderById(order_id);
 }

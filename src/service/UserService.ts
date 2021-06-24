@@ -1,83 +1,42 @@
 import { encryptPassword } from "../auth/password";
 import { addressAccess, orderAccess, userAccess, userOrderAccess } from "../data";
 import { getUserObject, toGql } from "../data/accessHelpers/UserData";
-import { UserType, UserTypeNew } from "../types/DomainTypes";
+import { UserOrderType, UserType, UserTypeNew } from "../types/DomainTypes";
 import { OrderGqlType, UserGqlType } from "../types/GqlTypes";
-import { createOrder, getOrderById, updateOrder } from "./OrderService";
+import { addOrderToUser, createOrder, getOrderById, updateOrder, updateOrderStatus } from "./OrderService";
 import { join } from "./serviceHelpers";
 
 
-async function attachAddress(user: any) {
+export async function getUserAddress(user: any) {
     const address:any = await addressAccess.getById(user.address_id);
-    let userGql = toGql(user);
-    userGql.address = {...address};
-
-    return userGql;
+    
+    return {...address}
 }
 
 
-async function attachOrders(user: UserGqlType) {
-    const result = await join(user, userOrderAccess, getOrderById, "user_id", "orders", "user_id");
-    return result;  
+
+export async function getUserOrders(user:any) {
+    const result = await join(toGql(user), userOrderAccess, getOrderById, "user_id", "orders", "order_id");
+    console.log(result.orders)
+    return result.orders;  
 }
 
-async function attachCart(user: UserGqlType) {
-    const cart:any = await orderAccess.getById(user.cart as number);
-    user.cart = cart;
+export async function getUserCart(user:any) {
+    const cart:any = await orderAccess.getById(user.cart_id);
 
-    return user;
-}
-
-async function attachCartToUsers(users: any[]) {
-    let result = [];
-
-    for(let user of users) {
-        result.push(await attachCart(user));
-    }
-
-
-    return result;
-}
-
-async function attachAddressToUsers(users: any[]) {
-    let result = [];
-
-    for(let user of users) {
-        result.push(await attachAddress(user));
-    }
-
-    return result;
-}
-
-async function attachOrdersToUsers(users: any[]) {
-    let result = [];
-
-    for(let user of users) {
-        result.push(await attachOrders(user));
-    }
-
-    return result;
+    return {...cart}
 }
 
 export function getAllUsers() {
     return userAccess.getAll()
-    .then(attachAddressToUsers)
-    .then(attachOrdersToUsers)
-    .then(attachCartToUsers);
 }
 
 export function getUserById(id: number) {
     return userAccess.getById(id)
-    .then(attachAddress)
-    .then(attachOrders)
-    .then(attachCart);
 }
 
 export function getUserByUsername(name: string) {
     return userAccess.getByUsername(name)
-    .then(attachAddress)
-    .then(attachOrders)
-    .then(attachCart);
 }
 
 export async function addUser(username: string, password: string, email: string) {
@@ -106,4 +65,18 @@ export async function updateUserCart(user: UserType, cart: any) {
 
 
     return new_order;
+}
+
+export async function clearCart(user: UserType) {
+    return userAccess.emptyCart(user.id)
+}
+
+export async function saveCart(user: UserType) {
+    const cart_id = user.cart_id;
+    await updateOrderStatus(cart_id, "placed");
+    let result = await addOrderToUser(user.id, cart_id);
+
+    await userAccess.emptyCart(user.id);
+
+    return result;
 }
