@@ -46,11 +46,12 @@ app.get(
 app.get(
     "/auth/google/redirect",
     passport.authenticate('google'), (req: any, res: any) => {
-        res.send('done')
+        res.send(req.user)
     }
 )
 
 app.get('/logout', (req:any, res:any) => {
+    console.log(req.user)
     console.log('logged out')
     req.logout()
     res.send('logged out')
@@ -63,6 +64,11 @@ const server = new ApolloServer({
         return {
             getUser: () => req.user,
             logout: () => req.logout(),
+        }
+    },
+    playground: {
+        settings: {
+            'request.credentials': 'include',
         }
     }
 });

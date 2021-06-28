@@ -17,7 +17,6 @@ export async function getUserAddress(user: any) {
 
 export async function getUserOrders(user:any) {
     const result = await join(toGql(user), userOrderAccess, getOrderById, "user_id", "orders", "order_id");
-    console.log(result.orders)
     return result.orders;  
 }
 

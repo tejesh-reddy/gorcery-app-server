@@ -9,7 +9,6 @@ export async function join(
     joinField: string
     ){
         let joinValue = await joinAccessObject.getByField(joinColumn, mainObject.id);
-        console.log(joinValue)
 
 
         mainObject[field] = selectFromObjectArray(joinValue, joinField);

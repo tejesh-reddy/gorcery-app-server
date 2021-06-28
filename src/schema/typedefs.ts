@@ -16,7 +16,7 @@ export const typedefs = gql`
     }
 
     type User {
-        id: Int
+        id: String
         username: String
         email_id: String
         address: Address
