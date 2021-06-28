@@ -10,7 +10,6 @@ export const toUser = (data: any) :UserType => {
             email_id: null,
             address_id: null,
             cart_id: null,
-            passwordHash: null,
         };
     }
 
@@ -21,7 +20,6 @@ export const toUser = (data: any) :UserType => {
         email_id: data.email_id,
         address_id: data.address,
         cart_id: data.cart_id,
-        passwordHash: data.passwordHash,
     }
     return user;
 }
@@ -41,10 +39,10 @@ export const toGql = (data: UserType): UserGqlType => {
     return UserGqlObject;
 }
 
-export const getUserObject = (username: string, email_id: string) : UserTypeNew => {
+export const getUserObject = (googleId: number, username: string, email_id: string) : UserType => {
     return {
+        id: googleId,
         username: username,
-        passwordHash: null,
         email_id: email_id,
         address_id: null,
         cart_id: null,

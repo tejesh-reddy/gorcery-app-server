@@ -1,6 +1,6 @@
 import { getDataArrayPromise, getInsertIdPromise } from "../helpers/dataPromise";
 import { getFirstWords } from "../helpers/getFirstWords";
-import { UserTypeNew } from "../types/DomainTypes";
+import { UserType, UserTypeNew } from "../types/DomainTypes";
 import { UserGqlType } from "../types/GqlTypes";
 import { NoSerializor } from "./accessHelpers";
 import { toUser, toUserArray } from "./accessHelpers/UserData";
@@ -20,11 +20,10 @@ export const userHelpers = (connection:any, tableName: string) => {
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
         getById: (id: number) => singleAccessor(Queries.getById(id)),
-        getByUsername: (name: string) => singleAccessor(Queries.getByField("username", name)),
         getByToken: (token: string) => singleAccessor(Queries.getByField("token", token)),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
-        insertOne: (value: UserTypeNew) => executeInsert(connection, Queries.insert(value, tableFields), getInsertIdPromise),
+        insertOne: (value: UserType) => executeInsert(connection, Queries.insert(value, tableFields), getInsertIdPromise),
         updateCart: (id: number, cart_id: number) => executeInsert(connection, Queries.update(id, "cart_id", cart_id)),
         emptyCart: (id: number) => executeInsert(connection, Queries.updateToNull(id, "cart_id")),
     }

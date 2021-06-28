@@ -1,43 +1,48 @@
 import { userAccess } from "../data";
-import { getUserById } from "../service/UserService";
+import { addUser, getUserById } from "../service/UserService";
 import { validatePassword } from "./password";
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 
 passport.use(
-    new LocalStrategy((username: any, password:any, callback:any) => {
-        userAccess.getByUsername(username)
-        .then((user:any) => {
-            if(!user.id) {
-                return callback(null, false);
-            }
-
-            console.log(user);
-
-            validatePassword(password, user.passwordHash)
-            .then(match => {
-                if(match) {
-                    callback(null, user);
+    new GoogleStrategy(
+        {
+            clientID: "670811861462-kohvbhe437a8hspoqgomeh9n62p1tne1.apps.googleusercontent.com",
+            clientSecret: "NDaNtnN-8OwyyIoeFtYrisdt",
+            callbackURL: "/auth/google/redirect",
+        },
+        (accessToken:any, refreshToken:any, email:any, done:any) => {
+            console.log('access token:', accessToken)
+            console.log('email:', email.id, email.displayName, email.emails[0].value)
+            const userId = email.id;
+            const username = email.displayName;
+            const emailId = email.emails[0].value;
+            getUserById(userId)
+            .then((user: any) => {
+                if(!user.id) {
+                    addUser(userId, username, emailId)
+                    .then(newUser => done(null, newUser))
                 }
                 else {
-                    callback(null, false);
+                    done(null, user)
                 }
             })
-        })
-        .catch(err => callback(err));
-    })
+        }
+    )
 );
 
 passport.serializeUser((user: any, callback: any) => {
+    console.log('-----', user, user.id)
     callback(null, user.id);
 })
 
-passport.deserializeUser((user: any, callback: any) => {
-    getUserById(user)
+passport.deserializeUser((userId: any, callback: any) => {
+    getUserById(userId)
     .then((user: any) => {
         if(!user.id) {
+            console.log(user, userId)
             callback(new Error("Bad ID"));
         }
         else {

@@ -29,10 +29,9 @@ const TableDefs:TableDefType[] = [
     },
     {
         name: "user",
-        def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(30) NOT NULL,
-        passwordHash VARCHAR(70) NOT NULL,
-        email_id VARCHAR(30) NOT NULL,
+        def: `id VARCHAR(25) PRIMARY KEY,
+        username VARCHAR(60) NOT NULL,
+        email_id VARCHAR(60) NOT NULL,
         address INT,
         cart_id INT,
         CONSTRAINT FOREIGN KEY FK_Address (address)
@@ -42,7 +41,7 @@ const TableDefs:TableDefType[] = [
     },
     {
         name: "user_orders",
-        def: `user_id INT NOT NULL,
+        def: `user_id VARCHAR(25) NOT NULL,
         order_id INT NOT NULL,
         PRIMARY KEY(user_id, order_id),
         CONSTRAINT FOREIGN KEY FK_User (user_id)

@@ -34,7 +34,6 @@ export type UserTypeNew = {
     email_id: string,
     address_id: number,
     cart_id: number,
-    passwordHash: string,
 }
 
 export type UserType = {id: number} & UserTypeNew;

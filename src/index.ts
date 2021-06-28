@@ -36,15 +36,25 @@ app.use(passport.session());
 app.get("/", () => "logged in")
 
 // Authentication route
-app.post(
-    "/login",
-    passport.authenticate("local"),
-    (err: any, req: any, res: any, next: any) => {
-      if (err) next(err);
-      console.log("You are logged in!");
-    }
+app.get(
+    "/auth/google",
+    passport.authenticate("google", {
+        scope: ['profile', 'email']
+    })
   );
   
+app.get(
+    "/auth/google/redirect",
+    passport.authenticate('google'), (req: any, res: any) => {
+        res.send('done')
+    }
+)
+
+app.get('/logout', (req:any, res:any) => {
+    console.log('logged out')
+    req.logout()
+    res.send('logged out')
+})
 
 const server = new ApolloServer({
     resolvers,
