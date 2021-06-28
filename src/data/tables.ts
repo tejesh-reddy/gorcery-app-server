@@ -53,7 +53,9 @@ const TableDefs:TableDefType[] = [
         name:"grocery",
         def: `id INT AUTO_INCREMENT, 
         name VARCHAR(50),
-        cost INTEGER, 
+        cost DECIMAL(6, 2),
+        unit VARCHAR(12),
+        url VARCHAR(120),
         category_id INT NOT NULL,
         PRIMARY KEY (id),
         CONSTRAINT FOREIGN KEY FK_Category (category_id)
