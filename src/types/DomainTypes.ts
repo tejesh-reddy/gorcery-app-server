@@ -2,6 +2,7 @@ export type GroceryTypeNew = {
     name: string,
     cost: number,
     unit: string,
+    image: string,
 }
 
 

@@ -6,7 +6,8 @@ export const toGrocery = (data: any) => {
         id: data.id,
         name: data.name,
         cost: data.cost,
-        unit: data.unit
+        unit: data.unit,
+        image: data.url,
     }
 
     return grocery;

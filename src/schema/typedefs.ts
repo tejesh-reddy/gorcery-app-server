@@ -46,6 +46,7 @@ export const typedefs = gql`
         name: String
         cost: Float
         unit: String
+        image: String
         id: Int!
     }
 

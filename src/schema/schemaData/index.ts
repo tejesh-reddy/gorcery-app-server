@@ -1,4 +1,4 @@
-import { CategoryQueries, CategoryQueryResolvers } from "./category"
+import { CategoryQueries, CategoryQueryResolvers, CategoryTypeResolvers } from "./category"
 import { GroceryQueries, GroceryQueryResolvers } from "./grocery"
 import { OrderQueries, OrderQueryResolvers } from "./order"
 import { UserQueries, UserQueryResolvers, UserMutations, UserMutationResolvers, UserTypeResolvers } from "./user"
@@ -19,7 +19,9 @@ export const QueryResolvers = {
 }
 
 export const TypeResolvers = {
-    ...UserTypeResolvers
+    ...UserTypeResolvers,    
+    ...CategoryTypeResolvers,
+
 }
 
 export const Mutations = {
