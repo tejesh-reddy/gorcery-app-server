@@ -44,9 +44,9 @@ export const typedefs = gql`
 
     type Grocery {
         name: String
-        cost: Int
+        cost: Float
+        unit: String
         id: Int!
-        category_id: Int
     }
 
     type Order {

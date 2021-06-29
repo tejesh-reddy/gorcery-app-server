@@ -1,7 +1,7 @@
 export type GroceryTypeNew = {
     name: string,
     cost: number,
-    category_id: number,
+    unit: string,
 }
 
 
