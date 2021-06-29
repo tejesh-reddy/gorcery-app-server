@@ -16,24 +16,24 @@ export const typedefs = gql`
     }
 
     type User {
-        id: String
-        username: String
-        email_id: String
+        id: String!
+        username: String!
+        email_id: String!
         orders: [Order!]
         cart: Order
     }
  
     type Category {
         id: Int!
-        name: String
-        groceries: [Grocery!]
+        name: String!
+        groceries: [Grocery!]!
     }
 
     type Address {
-        house_no: String
+        house_no: String!
         street: String
-        city: String
-        postal_code: Int
+        city: String!
+        postal_code: Int!
     }
 
     type Item {
@@ -42,28 +42,35 @@ export const typedefs = gql`
     }
 
     type Grocery {
-        name: String
-        cost: Float
-        unit: String
+        name: String!
+        cost: Float!
+        unit: String!
         image: String
         id: Int!
     }
 
     type Order {
-        id: Int
-        status: String
+        id: Int!
+        status: String!
         items: [Item!]
         address: Address
     }
 
     input OrderInput {
-        status: String
+        status: String!
         items: [ItemInput!]
     }
 
     input ItemInput {
         grocery_id: Int!
         quantity: Int!
+    }
+
+    input AddressInput {
+        house_no: String!
+        street: String
+        city: String!
+        postal_code: Int!
     }
 
 `

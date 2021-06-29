@@ -23,6 +23,7 @@ export const orderHelpers = (connection:any, tableName: string) => {
 
         insertOne: (value: OrderTypeNew) => executeInsert(connection, Queries.insert(value, tableFields)),
         updateStatus: (id: number, status: string) => executeInsert(connection, Queries.update(id, "status", status)),
+        updateAddress: (id: number, address_id: number) => executeInsert(connection, Queries.update(id, "address_id", address_id)),
     }
 
 }
