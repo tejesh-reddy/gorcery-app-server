@@ -7,12 +7,6 @@ import { addOrderToUser, createOrder, getOrderById, updateOrder, updateOrderStat
 import { join } from "./serviceHelpers";
 
 
-export async function getUserAddress(user: any) {
-    const address:any = await addressAccess.getById(user.address_id);
-    
-    return {...address}
-}
-
 
 
 export async function getUserOrders(user:any) {
@@ -42,7 +36,7 @@ export async function addUser(googleId: number, username: string, email: string)
 }
 
 export async function createCart(user: UserType, cart: any) {
-    const order = await createOrder("cart", cart.items);
+    const order:any = await createOrder("cart", cart.items);
 
     user.cart_id = order.id;
     userAccess.updateCart(user.id, user.cart_id);

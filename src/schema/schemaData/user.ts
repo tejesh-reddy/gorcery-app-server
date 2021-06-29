@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server-express";
 import { authorizeUser } from "../../auth/authorizeUser";
-import { addUser, clearCart, getAllUsers, getUserAddress, getUserById, getUserCart, getUserOrders, saveCart, updateUserCart } from "../../service/UserService";
+import { addUser, clearCart, getAllUsers, getUserById, getUserCart, getUserOrders, saveCart, updateUserCart } from "../../service/UserService";
 import { OrderTypeNew } from "../../types/DomainTypes";
 
 export const UserQueries = `
@@ -32,7 +32,6 @@ export const UserMutationResolvers = {
 export const UserTypeResolvers = {
    
     User: {
-        address: (parent: any) => getUserAddress(parent),
         orders: (parent: any) => getUserOrders(parent),
         cart: (parent: any) =>  getUserCart(parent),
     }

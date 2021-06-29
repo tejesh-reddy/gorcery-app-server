@@ -17,7 +17,7 @@ export type OrderTypeNew = {
     status: string,
 };
 
-export type OrderType = {id:number} & OrderTypeNew;
+export type OrderType = {id:number, address_id: number} & OrderTypeNew;
 
 export type OrderItemsType = {
     grocery_id:number,
@@ -33,7 +33,6 @@ export type UserOrderType = {
 export type UserTypeNew = {
     username: string,
     email_id: string,
-    address_id: number,
     cart_id: number,
 }
 

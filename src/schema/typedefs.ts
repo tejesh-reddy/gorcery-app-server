@@ -19,7 +19,6 @@ export const typedefs = gql`
         id: String
         username: String
         email_id: String
-        address: Address
         orders: [Order!]
         cart: Order
     }
@@ -54,6 +53,7 @@ export const typedefs = gql`
         id: Int
         status: String
         items: [Item!]
+        address: Address
     }
 
     input OrderInput {

@@ -25,17 +25,17 @@ const TableDefs:TableDefType[] = [
     {  
         name: "orders",
         def: `id INT PRIMARY KEY AUTO_INCREMENT,
-        status VARCHAR(10)`
+        status VARCHAR(10),
+        address_id INT,
+        CONSTRAINT FOREIGN KEY FK_Address (address_id)
+        REFERENCES address(id)`
     },
     {
         name: "user",
         def: `id VARCHAR(25) PRIMARY KEY,
         username VARCHAR(60) NOT NULL,
         email_id VARCHAR(60) NOT NULL,
-        address INT,
         cart_id INT,
-        CONSTRAINT FOREIGN KEY FK_Address (address)
-        REFERENCES address(id),
         CONSTRAINT FOREIGN KEY FK_Cart (cart_id)
         REFERENCES orders(id)`
     },

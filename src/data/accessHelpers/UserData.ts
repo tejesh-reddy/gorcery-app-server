@@ -8,7 +8,6 @@ export const toUser = (data: any) :UserType => {
             id: null,
             username: null,
             email_id: null,
-            address_id: null,
             cart_id: null,
         };
     }
@@ -18,7 +17,6 @@ export const toUser = (data: any) :UserType => {
         id: data.id,
         username: data.username,
         email_id: data.email_id,
-        address_id: data.address,
         cart_id: data.cart_id,
     }
     return user;
@@ -34,7 +32,7 @@ export const toUserArray = (data: any[]) : UserType[] => {
 }
 
 export const toGql = (data: UserType): UserGqlType => {
-    let UserGqlObject:UserGqlType = {...data, address: data.address_id, orders: [], cart: data.cart_id};
+    let UserGqlObject:UserGqlType = {...data, orders: [], cart: data.cart_id};
 
     return UserGqlObject;
 }
@@ -44,7 +42,6 @@ export const getUserObject = (googleId: number, username: string, email_id: stri
         id: googleId,
         username: username,
         email_id: email_id,
-        address_id: null,
         cart_id: null,
     }
 }

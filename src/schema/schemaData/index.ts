@@ -1,6 +1,6 @@
 import { CategoryQueries, CategoryQueryResolvers, CategoryTypeResolvers } from "./category"
 import { GroceryQueries, GroceryQueryResolvers } from "./grocery"
-import { OrderQueries, OrderQueryResolvers } from "./order"
+import { OrderQueries, OrderQueryResolvers, OrderTypeResolvers } from "./order"
 import { UserQueries, UserQueryResolvers, UserMutations, UserMutationResolvers, UserTypeResolvers } from "./user"
 
 
@@ -21,6 +21,7 @@ export const QueryResolvers = {
 export const TypeResolvers = {
     ...UserTypeResolvers,    
     ...CategoryTypeResolvers,
+    ...OrderTypeResolvers,
 
 }
 

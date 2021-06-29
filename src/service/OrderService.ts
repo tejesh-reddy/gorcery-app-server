@@ -1,4 +1,4 @@
-import { groceryAccess, orderAccess, orderItemsAccess, userOrderAccess } from "../data";
+import { addressAccess, groceryAccess, orderAccess, orderItemsAccess, userOrderAccess } from "../data";
 import { toGql } from "../data/accessHelpers/GroceryData";
 import { OrderType, OrderTypeNew } from "../types/DomainTypes";
 import { OrderGqlType } from "../types/GqlTypes";
@@ -6,33 +6,28 @@ import { getGroceryById } from "./GroceryService";
 import { addOrderItems, deleteOrderItems, getItemWithQuantity } from "./orderItemsService";
 import { join } from "./serviceHelpers";
 
-const Orders:any[] = [];
+export async function getOrderAddress(order: any) {
+    const address:any = await addressAccess.getById(order.address_id);
+    
+    return {...address}
+}
 
-async function attachItems(order:any) {
+
+export async function getOrderItems(order:any) {
     let orderGql = toGql(order);
     let result = await join(orderGql, orderItemsAccess, (groceryId: number) => getItemWithQuantity(orderGql.id, groceryId), "order_id", "items", "grocery_id");
 
 
     
-    return result;     
-}
-
-async function attachItemsToOrders(orderArray: unknown[]) {
-    let result = [];
-    for(let order of orderArray) {
-        result.push(await attachItems(order));
-    }
-
-
-    return result;
+    return result.items;     
 }
 
 export function getOrderById(id: number){
-    return orderAccess.getById(id).then(attachItems);
+    return orderAccess.getById(id);
 }
 
 export function getAllOrders(){
-    return orderAccess.getAll().then(attachItemsToOrders);
+    return orderAccess.getAll();
 }
 
 export async function updateOrder(order_id: number, items: any[]) {
