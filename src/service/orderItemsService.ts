@@ -19,7 +19,7 @@ export async function getItemWithQuantity(orderId: number, groceryId: number) {
 export async function deleteOrderItems(order_id: number){
     const res = await orderItemsAccess.removeOrder(order_id);
 
-    const orderItems =  await orderItemsAccess.getAll();
+    await orderItemsAccess.getAll();
     return res;
 }
 
