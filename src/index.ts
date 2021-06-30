@@ -3,6 +3,7 @@ import cors from 'cors';
 import session from 'express-session';
 const {v4: uuidv4} = require('uuid')
 var MySqlStore = require('express-mysql-session');
+const {createProxyMiddleware} = require('http-proxy-middleware');
 import { ApolloServer } from 'apollo-server-express';
 import { typedefs, resolvers } from './schema'
 import { connection } from './data';
@@ -11,7 +12,25 @@ import { passport } from './auth/passport';
 const app = express();
 const PORT:number = 8080;
 
-app.use("*", cors());
+
+
+
+app.use(cors());
+
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
+    res.setHeader(
+        "Access-Control-Allow-Headers",
+        "X-Requested-With,content-type"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    next();
+});
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -33,13 +52,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get("/", () => "logged in")
 
 // Authentication route
 app.get(
     "/auth/google",
     passport.authenticate("google", {
-        scope: ['profile', 'email']
+        scope: ['profile', 'email'],
     })
   );
   
@@ -51,10 +69,7 @@ app.get(
 )
 
 app.get('/logout', (req:any, res:any) => {
-    console.log(req.user)
-    console.log('logged out')
     req.logout()
-    res.send('logged out')
 })
 
 const server = new ApolloServer({

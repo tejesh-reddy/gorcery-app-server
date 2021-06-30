@@ -14,8 +14,6 @@ passport.use(
             callbackURL: "/auth/google/redirect",
         },
         (accessToken:any, refreshToken:any, email:any, done:any) => {
-            console.log('access token:', accessToken)
-            console.log('email:', email.id, email.displayName, email.emails[0].value)
             const userId = email.id;
             const username = email.displayName;
             const emailId = email.emails[0].value;
@@ -23,7 +21,7 @@ passport.use(
             .then((user: any) => {
                 if(!user.id) {
                     addUser(userId, username, emailId)
-                    .then(newUser => done(null, newUser))
+                    .then(newUser => {console.log('++++++', newUser); done(null, newUser)})
                 }
                 else {
                     done(null, user)
@@ -34,7 +32,7 @@ passport.use(
 );
 
 passport.serializeUser((user: any, callback: any) => {
-    console.log('-----', user, user.id)
+
     callback(null, user.id);
 })
 
