@@ -24,7 +24,7 @@ export function getAllUsers() {
     return userAccess.getAll()
 }
 
-export function getUserById(id: number) {
+export function getUserById(id: string) {
     return userAccess.getById(id)
 }
 
