@@ -3,7 +3,7 @@ import { addressAccess, orderAccess, userAccess, userOrderAccess } from "../data
 import { getUserObject, toGql } from "../data/accessHelpers/UserData";
 import { UserOrderType, UserType, UserTypeNew } from "../types/DomainTypes";
 import { OrderGqlType, UserGqlType } from "../types/GqlTypes";
-import { addOrderToUser, createOrder, getOrderById, updateOrder, updateOrderStatus } from "./OrderService";
+import { addOrderToUser, createOrder, deleteOrder, getOrderById, updateOrder, updateOrderStatus } from "./OrderService";
 import { join } from "./serviceHelpers";
 
 
@@ -57,7 +57,8 @@ export async function updateUserCart(user: UserType, cart: any) {
 }
 
 export async function clearCart(user: UserType) {
-    return userAccess.emptyCart(user.id)
+    await userAccess.emptyCart(user.id)
+    await deleteOrder(user.cart_id)
 }
 
 export async function saveCart(user: UserType) {

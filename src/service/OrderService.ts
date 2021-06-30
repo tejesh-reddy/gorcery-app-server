@@ -36,11 +36,19 @@ export async function updateOrderAddress(order_id:number, address: AddressGqlTyp
     return getOrderById(order_id)
 }
 
+
 export async function updateOrder(order_id: number, items: any[]) {
     await deleteOrderItems(order_id);
     await addOrderItems(order_id, items);
 
     return getOrderById(order_id);
+}
+
+export async function deleteOrder(order_id: number){
+    await Promise.all([
+        deleteOrderItems(order_id),
+        orderAccess.delete(order_id),
+    ])
 }
 
 export async function createOrder(status: string, items: any[]) {
