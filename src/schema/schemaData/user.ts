@@ -19,7 +19,6 @@ export const UserMutations = `
 export const UserQueryResolvers = {
     user: (_:unknown, args: any, context: any) => authorizeUser(context.getUser()).then(user => getUserById(user.id)),
     users: () => getAllUsers(),
-    userById: (_:unknown, {id}: {id: number}) => getUserById(id)
 }
 
 export const UserMutationResolvers = {

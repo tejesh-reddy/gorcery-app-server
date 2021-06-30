@@ -19,7 +19,7 @@ export const userHelpers = (connection:any, tableName: string) => {
 
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
-        getById: (id: number) => singleAccessor(Queries.getById(id)),
+        getById: (id: string) => singleAccessor(Queries.getById(id)),
         getByToken: (token: string) => singleAccessor(Queries.getByField("token", token)),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
