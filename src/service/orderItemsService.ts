@@ -19,7 +19,6 @@ export async function getItemWithQuantity(orderId: number, groceryId: number) {
 export async function deleteOrderItems(order_id: number){
     const res = await orderItemsAccess.removeOrder(order_id);
 
-    await orderItemsAccess.getAll();
     return res;
 }
 
@@ -32,7 +31,7 @@ export async function addOrderItems(order_id: number, items: any[]){
             quantity: item.quantity,
         };
 
-        await orderItemsAccess.insertOne(itemFormat);
+        promises.push(orderItemsAccess.insertOne(itemFormat));
     })
     await Promise.all(promises);
 }

@@ -49,6 +49,7 @@ export async function updateUserCart(user: UserType, cart: any) {
     if(user.cart_id == null){
         return createCart(user, cart);
     }
+
     
     let new_order = await updateOrder(user.cart_id, cart.items);
 
