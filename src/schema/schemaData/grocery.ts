@@ -8,17 +8,8 @@ export const GroceryQueries = `
 `;
 
 export const GroceryQueryResolvers = {
-    grocery: async function(_:unknown, { name }: {name: string}) {
-        let result = {}
-        await getGroceryByName(name).then(data => result=data);
-        return result;
-    },
-
-    groceryById: async function(_:unknown, { id } : { id:number }) {
-        let result = {};
-        await getGroceryById(id).then(data=> result = data);
-        return result;
-    },
+    grocery:  (_:unknown, { name }: {name: string}) => getGroceryByName(name),
+    groceryById: (_:unknown, { id } : { id:number })=> getGroceryById(id),
 
     groceries: () => getAllGroceries(),
 

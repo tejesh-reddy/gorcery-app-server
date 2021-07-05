@@ -17,7 +17,7 @@ export const OrderQueryResolvers = {
 }
 
 export const OrderMutationResolvers = {
-    changeAddress: (_:unknown, {id, address} : {id: any, address: any}, context:any) => authorizeUser(context.getUser()).then(() => updateOrderAddress(id, address)) 
+    changeAddress: (_:unknown, {id, address} : {id: any, address: any}, context:any) => authorizeUser(context.getUser).then(() => updateOrderAddress(id, address)) 
 }
 
 export const OrderTypeResolvers = {

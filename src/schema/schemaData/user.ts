@@ -17,15 +17,15 @@ export const UserMutations = `
 `
 
 export const UserQueryResolvers = {
-    user: (_:unknown, args: any, context: any) => authorizeUser(context.getUser()).then(user => getUserById(user.id)),
+    user: (_:unknown, args: any, context: any) => authorizeUser(context.getUser).then(user => getUserById(user.id)),
     users: () => getAllUsers(),
 }
 
 export const UserMutationResolvers = {
     logout: (_:unknown, args: any, context: any) => context.logout(),
-    updateCart: (_:unknown, { cart }:{cart: any}, context: any) => authorizeUser(context.getUser()).then(user => updateUserCart(user, cart)),
-    placeOrder: (_:unknown, args: any, context: any) => authorizeUser(context.getUser()).then(saveCart),
-    emptyCart: (_:unknown, args: any, context: any) => authorizeUser(context.getUser()).then(clearCart).then(()=> "done"),
+    updateCart: (_:unknown, { cart }:{cart: any}, context: any) => authorizeUser(context.getUser).then(user => updateUserCart(user, cart)),
+    placeOrder: (_:unknown, args: any, context: any) => authorizeUser(context.getUser).then(saveCart),
+    emptyCart: (_:unknown, args: any, context: any) => authorizeUser(context.getUser).then(clearCart).then(()=> "done"),
 }
 
 export const UserTypeResolvers = {

@@ -21,7 +21,7 @@ passport.use(
             .then((user: any) => {
                 if(!user.id) {
                     addUser(userId, username, emailId)
-                    .then(newUser => {console.log('++++++', newUser); done(null, newUser)})
+                    .then(newUser => done(null, newUser))
                 }
                 else {
                     done(null, user)
