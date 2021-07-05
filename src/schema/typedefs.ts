@@ -1,5 +1,5 @@
 var gql = require('graphql-tag');
-import { Mutations, Queries } from './schemaData';
+import { Mutations, Queries, Typedefs } from './schemaData';
 
 
 
@@ -13,48 +13,11 @@ export const typedefs = gql`
 
     type Mutation {
         ${Mutations.UserMutations}
+        ${Mutations.OrderMutations}
     }
 
-    type User {
-        id: String!
-        username: String!
-        email_id: String!
-        orders: [Order!]
-        cart: Order
-    }
- 
-    type Category {
-        id: Int!
-        name: String!
-        groceries: [Grocery!]!
-    }
+    ${Typedefs}
 
-    type Address {
-        house_no: String!
-        street: String
-        city: String!
-        postal_code: Int!
-    }
-
-    type Item {
-        grocery: Grocery!
-        quantity: Int!
-    }
-
-    type Grocery {
-        name: String!
-        cost: Float!
-        unit: String!
-        image: String
-        id: Int!
-    }
-
-    type Order {
-        id: Int!
-        status: String!
-        items: [Item!]
-        address: Address
-    }
 
     input OrderInput {
         status: String!
