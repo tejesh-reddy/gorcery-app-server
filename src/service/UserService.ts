@@ -29,10 +29,23 @@ export function getUserById(id: string) {
 }
 
 
-export async function addUser(googleId: number, username: string, email: string) {
-    let user = getUserObject(googleId, username, email);
+
+export async function createUser(id: string, username: string, email: string) {
+    console.log(id, username, email);
+    let user = getUserObject(id, username, email);
     await userAccess.insertOne(user);
-    return googleId;
+    return id;
+}
+
+export async function findOrCreateUser(id: string, userProvider: any, token: string) {
+    let user = await getUserById(id)
+    if(!user.id) {
+        let {username, email} = await userProvider(token);
+        user = await createUser(id, username, email)
+    }
+
+    console.log('user is: ', user);
+    return user;
 }
 
 export async function createCart(user: UserType, cart: any) {

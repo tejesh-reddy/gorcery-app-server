@@ -63,7 +63,7 @@ export async function updateOrderStatus(order_id: number, status: string) {
     orderAccess.updateStatus(order_id, status)
 }
 
-export async function addOrderToUser(user_id: number, order_id: number) {
+export async function addOrderToUser(user_id: string, order_id: number) {
     const userOrder = {
         user_id, 
         order_id

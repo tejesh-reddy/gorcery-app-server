@@ -1,5 +1,7 @@
+import axios from "axios";
 import { verify } from "jsonwebtoken";
 import { JwksClient } from "jwks-rsa";
+import { createUser, findOrCreateUser } from "../service/UserService";
 
 export const client = new JwksClient({
     jwksUri: "https://dev-fptcog10.us.auth0.com/.well-known/jwks.json",
@@ -11,6 +13,22 @@ export const getKey = (header: any, callback: any) => {
       callback(null, signingKey);
     });
   };
+
+const getUserinfo = (authHeader: string) => {
+  return axios.get("https://dev-fptcog10.us.auth0.com/userinfo", {
+    headers: {
+      'Authorization': authHeader,
+    }
+  }).then(result=>{
+    let data = result.data;
+    return {
+      id: data.sub,
+      username: data.nickname||data.name,
+      email: data.email,
+    }
+  })
+  .catch(console.log)
+}
 export const GetUser = (request: any) => {
     const authHeader: string = request.headers.authorization || null;
   
@@ -18,6 +36,7 @@ export const GetUser = (request: any) => {
       return null;
 
     const token = authHeader.split(" ")[1];
+
   
     const user = new Promise((resolve, reject) => {
       verify(
@@ -28,10 +47,9 @@ export const GetUser = (request: any) => {
           issuer: "https://dev-fptcog10.us.auth0.com/",
           audience: "https://grocery-app.com",
         },
-        (err, decoded) => {
+        async (err, decoded) => {
           if (err) return reject(err);
-          console.log('decoded:', decoded)
-          resolve(decoded.iss);
+          resolve(findOrCreateUser(decoded.sub, getUserinfo, authHeader))
         }
       );
     });

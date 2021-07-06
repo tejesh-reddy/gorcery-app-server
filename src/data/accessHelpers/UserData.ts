@@ -37,7 +37,7 @@ export const toGql = (data: UserType): UserGqlType => {
     return UserGqlObject;
 }
 
-export const getUserObject = (googleId: number, username: string, email_id: string) : UserType => {
+export const getUserObject = (googleId: string, username: string, email_id: string) : UserType => {
     return {
         id: googleId,
         username: username,

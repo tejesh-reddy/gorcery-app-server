@@ -2,8 +2,8 @@ import { getOrderAddress, getOrderItems } from "../../../service/OrderService";
 
 export const OrderTypedef = `
 type Order {
-    id: Int!
-    status: String!
+    id: Int
+    status: String
     items: [Item!]
     address: Address
 }

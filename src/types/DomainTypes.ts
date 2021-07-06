@@ -26,7 +26,7 @@ export type OrderItemsType = {
 }
 
 export type UserOrderType = {
-    user_id:number,
+    user_id:string,
     order_id:number,
 }
 
@@ -36,7 +36,7 @@ export type UserTypeNew = {
     cart_id: number,
 }
 
-export type UserType = {id: number} & UserTypeNew;
+export type UserType = {id: string} & UserTypeNew;
 
 export type AddressType = {
     house_no: string,

@@ -19,12 +19,12 @@ export const userHelpers = (connection:any, tableName: string) => {
 
     return {
         getAll: () => arrayAccessor(Queries.getAll()),
-        getById: (id: string) => singleAccessor(Queries.getById(id)),
+        getById: (id: string) : Promise<any> => singleAccessor(Queries.getById(id)),
         getByToken: (token: string) => singleAccessor(Queries.getByField("token", token)),
         getByField: (fieldName: string, value: any) => arrayAccessor(Queries.getByField(fieldName, value)),
 
         insertOne: (value: UserType) => executeInsert(connection, Queries.insert(value, tableFields), getInsertIdPromise),
-        updateCart: (id: number, cart_id: number) => executeInsert(connection, Queries.update(id, "cart_id", cart_id)),
-        emptyCart: (id: number) => executeInsert(connection, Queries.updateToNull(id, "cart_id")),
+        updateCart: (id: string, cart_id: number) => executeInsert(connection, Queries.update(id, "cart_id", cart_id)),
+        emptyCart: (id: string) => executeInsert(connection, Queries.updateToNull(id, "cart_id")),
     }
 }

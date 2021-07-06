@@ -3,7 +3,7 @@ import { OrderType } from "../../types/DomainTypes";
 import { OrderGqlType } from "../../types/GqlTypes";
 
 
-export const toOrder = (data: any) => {
+export const toOrder = (data: any):OrderType => {
 
     if(data === undefined) {
         return {

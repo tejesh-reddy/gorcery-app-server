@@ -11,7 +11,7 @@ const TableDefs:TableDefType[] = [
     {
         name: "category",
         def: `id INT AUTO_INCREMENT,
-        name VARCHAR(20),
+        name VARCHAR(25),
         PRIMARY KEY(id)`
     },
     {
@@ -32,8 +32,8 @@ const TableDefs:TableDefType[] = [
     },
     {
         name: "user",
-        def: `id VARCHAR(25) PRIMARY KEY,
-        username VARCHAR(60) NOT NULL,
+        def: `id VARCHAR(40) PRIMARY KEY,
+        username VARCHAR(60),
         email_id VARCHAR(60) NOT NULL,
         cart_id INT,
         CONSTRAINT FOREIGN KEY FK_Cart (cart_id)
